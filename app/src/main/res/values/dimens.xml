@@ -1,0 +1,90 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="size90">5dp</dimen>
+
+    <!--cc-->
+    <dimen name="popmenu_width">100.0dip</dimen>
+    <dimen name="popmenu_yoff">5.0dip</dimen>
+    <dimen name="dip2pix">1.0dip</dimen>
+
+    <dimen name="ad_tv_margin_top_bottom">10dp</dimen>
+    <dimen name="ad_tv_margin_left_right">10dp</dimen>
+    <dimen name="pmtsize">18sp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="margin_15dp">15dp</dimen>
+    <dimen name="item_height">50dp</dimen>
+
+
+    <dimen name="text_field_border_width">1dp</dimen>
+    <dimen name="text_field_text_size">18dp</dimen>
+    <dimen name="member_gift_padding_left">20dp</dimen>
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
+    <dimen name="TitleTextSize">18dp</dimen>
+
+    <dimen name="pager_head_inner_search_bar_padding">10dp</dimen>
+    <dimen name="pager_head_inner_search_nodata">13dp</dimen>
+    <dimen name="pager_head_inner_search_bar_text_icon_miles">10dp</dimen>
+    <dimen name="pager_head_pulled_data_text_size">15dp</dimen>
+    <dimen name="pull_to_refresh_text_size">15dp</dimen>
+    <dimen name="activity_text_wigth">12dp</dimen>
+    <dimen name="fix_nick_name_height">160dp</dimen>
+    <dimen name="video_with">400dp</dimen>
+    <dimen name="video_height">300dp</dimen>
+    <dimen name="intro_size">14dp</dimen>
+    <dimen name="intro_ahead_size">15dp</dimen>
+    <dimen name="pager_head_pulled_data_text_height">40dp</dimen>
+
+    <dimen name="pager_head_search_bar_height">40dp</dimen>
+
+
+    <dimen name="pager_head_inner_search_bar__height">30dp</dimen>
+    <dimen name="item_height_more">75dp</dimen>
+    <dimen name="item_image_width">90dp</dimen>
+    <dimen name="item_image_height">60dp</dimen>
+    <dimen name="release_title_size">17dp</dimen>
+    <dimen name="text_magin_top">5dp</dimen>
+    <dimen name="text_magin_left">8dp</dimen>
+    <dimen name="topic_image_height">250dp</dimen>
+
+    <dimen name="title_size">18dp</dimen>
+    <dimen name="title_menu_size">16dp</dimen>
+    <dimen name="btn_size">16dp</dimen>
+    <dimen name="title_height">40dp</dimen>
+    <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="margin_30dp">30dp</dimen>
+    <dimen name="padding_10dp">10dp</dimen>
+    <dimen name="padding_15dp">15dp</dimen>
+    <dimen name="padding_5dp">4dp</dimen>
+    <dimen name="title_right_width">54dp</dimen>
+    <dimen name="height_address_item">80dp</dimen>
+    <dimen name="height_shopping_cart_window">45dp</dimen>
+    <dimen name="width_cart_submit_roder">100dp</dimen>
+    <dimen name="height_area_choose_item">90px</dimen>
+    <dimen name="size_area_choose_item">40px</dimen>
+    <dimen name="divider_height">1.5dp</dimen>
+    <dimen name="pop_dialog_width">280dp</dimen>
+    <color name="bg_divider_color">#dddddd</color>
+    <!-- 公共标题栏标题字体 -->
+    <dimen name="common_title_tvew_txt">20dip</dimen>
+    <!-- 公共标题栏右侧标题字体 -->
+    <dimen name="common_title_tvew_right_btn">15dip</dimen>
+    <dimen name="margin_5">5dip</dimen>
+    <dimen name="margin_10">10dip</dimen>
+    <dimen name="margin_15">15dip</dimen>
+    <dimen name="margin_20">20dip</dimen>
+    <color name="orangered">#f8601e</color>
+    <!-- 普通文本字体 -->
+    <dimen name="dimen_text">14dip</dimen>
+
+
+
+    <dimen name="image_height">122dip</dimen>
+</resources>

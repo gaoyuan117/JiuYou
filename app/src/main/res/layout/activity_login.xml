@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <include layout="@layout/title"/>
+
+<ImageView
+    android:id="@+id/logo"
+    android:layout_centerHorizontal="true"
+    android:layout_width="100dp"
+    android:layout_marginTop="25dp"
+    android:layout_marginBottom="25dp"
+    android:layout_height="100dp"
+    android:background="@mipmap/logo"
+    android:layout_below="@+id/rl_title"
+    />
+
+    <RelativeLayout
+        android:id="@+id/rl_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:layout_marginTop="23dp">
+
+        <ImageView
+            android:id="@+id/img_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:src="@mipmap/shouji"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/del_phone" />
+
+        <EditText
+            android:id="@+id/edt_login_user"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:layout_toLeftOf="@+id/del_phone"
+            android:layout_toRightOf="@+id/img_user"
+            android:background="@null"
+            android:hint="@string/hint_login_phone"
+            android:inputType="number"
+            android:maxLength="11"
+            android:singleLine="true"
+            />
+
+        <ImageView
+            android:id="@+id/del_phone"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="25dp"
+            android:onClick="delPhone"
+            android:scaleType="centerInside"
+            android:src="@mipmap/icon_del_txt"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_below="@+id/edt_login_user"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:background="@color/divider_color"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_user"
+        android:layout_marginTop="23dp">
+
+        <ImageView
+            android:id="@+id/img_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:src="@mipmap/mima"/>
+
+        <EditText
+            android:id="@+id/edt_reset_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:layout_toLeftOf="@+id/del_pwd"
+            android:layout_toRightOf="@+id/img_pwd"
+            android:autoText="false"
+            android:background="@null"
+            android:hint="@string/hint_login_pwd"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            />
+
+        <ImageView
+            android:id="@+id/del_pwd"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
+            android:onClick="delPwd"
+            android:scaleType="centerInside"
+            android:src="@mipmap/icon_del_txt"
+            android:visibility="gone"
+            />
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_below="@+id/edt_reset_pwd"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:background="@color/divider_color"
+            android:singleLine="true"/>
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/btn_enable_selector"
+        android:enabled="false"
+        android:gravity="center"
+        android:onClick="login"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_below="@+id/btn_login"
+        android:layout_marginTop="14dp">
+
+
+        <TextView
+            android:id="@+id/find_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:clickable="true"
+            android:layout_alignParentLeft="true"
+            android:gravity="center|left"
+            android:onClick="forgetPwd"
+            android:textColor="#656565"
+            android:text="@string/retrieve_pwd"/>
+
+        <TextView
+            android:id="@+id/regiester"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:clickable="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center|right"
+            android:onClick="register"
+            android:text="@string/register"
+            android:textColor="#e04a46"
+            android:textSize="14dp"/>
+
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

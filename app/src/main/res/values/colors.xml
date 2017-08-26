@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="alertdialog_line">#c6c6c6</color>
+    <color name="yellow_golden">#FF9A00</color>
+    <color name="gray">#cccccc</color>
+    <color name="devide_line">#f9f9f9</color>
+
+    <color name="drop_down_selected">#7B1FA2</color>
+    <color name="drop_down_unselected">#111111</color>
+
+    <color name="mask_color">#88888888</color>
+    <color name="check_bg">#f2f2f2</color>
+    <color name="divider_color">#e8e8e8</color>
+    <color name="divider_line">#dbdbdb</color>
+    <color name="un_press_color">#9C27B0</color>
+    <color name="primary_school_color">#E14946</color>
+    <color name="primary_school_colord">#CC5656</color>
+    <color name="middle_school_color">#3ac0b5</color>
+    <color name="middle_school_colord">#2E9A91</color>
+    <color name="high_school_color">#72a3ff</color>
+    <color name="high_school_colord">#5B82CC</color>
+
+    <color name="primary_text_color">#EFEFEF</color>
+    <color name="line">#f5f5f5</color>
+    <color name="line1">#B8B8B8</color>
+
+    <color name="primary_hintcolor">#dbe6ff</color>
+    <color name="middle_hintcolor">#dbe6ff</color>
+    <color name="high_hintcolor">#dbe6ff</color>
+    <color name="search_itemcolor">#767676</color>
+    <color name="item_clicked">#f7f7f7</color>
+    <color name="no_result">#b2b2b2</color>
+    <color name="result_textcolor1">#767676</color>
+    <color name="result_textcolor2">#949494</color>
+    <color name="translate">#00000000</color>
+    <color name="pop_hint_color">#c7c7c7</color>
+    <color name="btn_clicked_color">#656565</color>
+    <color name="btn_quit_color1">#cfcfcf</color>
+    <color name="btn_quit_color2">#72a3ff</color>
+    <color name="btn_quit_color3">#5b82cc</color>
+    <color name="dialog_color1">#545454</color>
+    <color name="login_color">#83d7f3</color>
+    <color name="devide_color1">#f46565</color>
+    <color name="devide_color2">#30b1a6</color>
+    <color name="devide_color3">#6899f7</color>
+    <color name="text_hint_color">#5e5e5e</color>
+
+
+    <!--cc-->
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="blue">#ff0000ff</color>
+    <color name="green">#ff00ff00</color>
+    <color name="red">#ffff0000</color>
+    <color name="higtlight">#ff0078f0</color>
+    <color name="durationtext">#ff7d7d7d</color>
+    <color name="background">#ffc3ddea</color>
+    <color name="yellow">#ffffcc00</color>
+    <color name="title">#ff274462</color>
+    <color name="ad_color">#66000000</color>
+
+    <color name="xn_red">#EC828B</color>
+    <color name="xn_black">#656565</color>
+    <color name="home_title">#E14946</color>
+    <color name="nonghong_color1">#d1544d</color>
+    <color name="transparent">#00000000</color>
+    <color name="normal_bg">#ffffff</color>
+    <color name="title_bg">#E14F47</color>
+    <color name="shallow_bg">#4A4A4A</color>
+    <color name="textcolor1">#4A4A4A</color>
+    <color name="textcolor2">#fde3e4</color>
+    <color name="colorTextRed">#B80012</color>
+    <color name="gapColor">#eaeaea</color>
+
+    <color name="refresh_text">#9b9b9b</color>
+    <color name="tv_pulled_data_tip_bg_color">#d8d8d8</color>
+    <color name="tv_pulled_data_tip_color">#000000</color>
+    <color name="search_bar_text">#adadad</color>
+    <color name="search_bar_fr">#eeeeee</color>
+    <color name="bg_gray">#f5f5f5</color>
+    <color name="common_title">#cd0102</color>
+    <color name="common_title_right_btn">#cd0102</color>
+    <color name="hint_color">#c3c3c3</color>
+    <color name="color_red">#e3483f</color>
+    <color name="login_cancle">#8f8f8f</color>
+    <color name="listback_color">#eeeeee</color>
+    <color name="actionsheet_blue">#037BFF</color>
+    <color name="actionsheet_red">#FD4A2E</color>
+    <color name="actionsheet_gray">#8F8F8F</color>
+    <color name="login_msg_color">#010101</color>
+    <color name="login_line">#aeafba</color>
+    <color name="account_manager_txt_color">#999999</color>
+    <color name="account_manager_txt_color2">#666666</color>
+    <color name="progress_color1">#ff9803</color>
+    <color name="progress_color2">#ff9803</color>
+    <color name="progress_color3">#ff9803</color>
+
+
+    <color name="light_blue">#6593cb</color>
+
+
+    <color name="titleColor">#19ACCA</color>
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#18ACCA</color>
+    <color name="line_color">#edeeef</color>
+    <color name="text_ora">#f3a56c</color>
+    <color name="text_red">#e34c47</color>
+    <color name="text_black">#474849</color>
+    <color name="text_gray">#9b9c9d</color>
+    <color name="bg_red">#d0554d</color>
+    <color name="bt_red">#e76e6a</color>
+
+
+</resources>

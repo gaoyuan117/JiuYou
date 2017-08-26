@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:id="@+id/layoutContent"
+    tools:context="com.jiuyou.ui.activity.OrderDetailActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_order_detail_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_red"
+                android:padding="16dp"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <include layout="@layout/include_order_detail" />
+
+            <!--待支付详情-->
+            <LinearLayout
+                android:id="@+id/ll_order_detail_daizhifu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/line_color"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tv_order_detail_chat"
+                    style="@style/order_detail_tv"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:text="联系卖家" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_order_detail_quxiao"
+                        style="@style/order_detail_tv"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:text="取消订单" />
+
+                    <TextView
+                        android:id="@+id/tv_order_detail_zhifu"
+                        style="@style/order_detail_tv"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:gravity="center"
+                        android:text="  去付款  " />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_order_detail_yanzheng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/line_color"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_order_detail_yanzheng"
+                    style="@style/order_detail_tv"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:text="验证真伪"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+
+            <!--自取／已支付／已支付还未接单 各种详情 写的时候判断-->
+            <LinearLayout
+                android:id="@+id/ll_order_detail_ziqu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/line_color"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_order_detail_nearby"
+                        style="@style/order_detail_tv"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:text="查看附近商家"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:id="@+id/tv_order_detail_pinglun"
+                        style="@style/order_detail_tv"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:gravity="center"
+                        android:text="   评论   "
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tv_order_detail_tuikuan"
+                        style="@style/order_detail_tv"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:gravity="center"
+                        android:text="   退款   "
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tv_order_detail_pingjia"
+                        style="@style/order_detail_tv"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:gravity="center"
+                        android:text="   评价   "
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tv_order_detail_jujue"
+                        style="@style/order_detail_tv"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:text="拒绝收货"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tv_order_detail_quere"
+                        style="@style/order_detail_tv"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:text="确认收货"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/tv_order_detail_erweima"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <!--配送中详情-->
+            <LinearLayout
+                android:id="@+id/ll_order_detail_ps"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.baidu.mapapi.map.MapView
+                    android:id="@+id/bmapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="380dp"
+                    android:clickable="true" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f6f7"
+    android:orientation="vertical"
+    tools:context="com.jiuyou.ui.activity.ReturnMoneyActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.jiuyou.global.MyListView
+                android:id="@+id/lv_return_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_return_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:background="@color/white"
+                android:padding="16dp"
+                android:text="贵州茅台酒"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/img_return"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginRight="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@color/text_ora" />
+
+                <TextView
+                    android:id="@+id/tv_return_name"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/img_return"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="贵州茅台酒"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_return_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/img_return"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/img_return"
+                    android:text="默认"
+                    android:textColor="@color/text_gray"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_return_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tv_return_name"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/margin_10dp"
+                    android:ellipsize="end"
+                    android:text="¥ 200.00"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_return_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tv_return_type"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/margin_10dp"
+                    android:text="x 1"
+                    android:textColor="@color/text_gray"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_10dp"
+                android:background="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_20dp"
+                android:text="请选择退款理由"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rg_return_buxiang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/rg_selector"
+                    android:padding="10dp"
+                    android:text="我不想买了"
+                    android:textColor="@color/text_gray"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/rg_return_diancuo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/rg_selector"
+                    android:padding="10dp"
+                    android:text="我点错了"
+                    android:textColor="@color/text_gray"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/rg_return_bufu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/rg_selector"
+                    android:padding="10dp"
+                    android:text="描述与产品不符"
+                    android:textColor="@color/text_gray"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/rg_return_other"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/rg_selector"
+                    android:padding="10dp"
+                    android:text="其他"
+                    android:textColor="@color/text_gray"
+                    android:textSize="18sp" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_marginTop="48dp"
+                android:id="@+id/tv_return"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_red"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="申请退款"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

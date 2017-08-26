@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/root_layout"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/search_titlebar" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_result_hasnet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <include layout="@layout/search_no_result" />
+
+            <include layout="@layout/search_result_bottom" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_result_nonet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="73dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="221.5dp"
+                    android:layout_height="182dp"
+                    android:layout_marginLeft="67.5dp"
+                    android:src="@drawable/con_err" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="56dp"
+                    android:text="@string/loading_err"
+                    android:textColor="#b2b2b2"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/loading_retry"
+                    android:layout_width="197dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_backbg"
+                    android:layout_marginTop="97dp"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:text="重试"
+                     />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="83.5dp">
+                <ImageView
+                    android:layout_width="206.5dp"
+                    android:layout_height="193dp"
+                    android:layout_marginLeft="74dp"
+                    android:src="@drawable/con_loading"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loading"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="105dp"
+                    android:textColor="#a5a5a5"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_canvers"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/include2"
+            android:alpha="0.3"
+            android:background="@color/black"
+            android:focusable="true"
+            android:visibility="gone" />
+    </RelativeLayout>
+</LinearLayout>

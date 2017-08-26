@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/title_bar_common_rv_viewGroup"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#E04A46"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/title_bar_operate_1"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:background="@drawable/selector_item_press_touming"
+            android:clickable="true"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_fanhui" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="修改昵称"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/edt_nikename"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="@dimen/margin_30dp"
+        android:layout_marginTop="40dp"
+        android:autoText="false"
+        android:singleLine="true"
+        android:background="@drawable/shape_corner3"
+        android:gravity="center"
+        android:hint="昵称"
+        android:maxLength="20"
+        />
+    <Button
+        android:id="@+id/btn_finish"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/btn_enable_selector"
+        android:enabled="false"
+        android:gravity="center"
+        android:onClick="login"
+        android:text="完成"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:layout_centerHorizontal="true" />
+
+
+</LinearLayout>

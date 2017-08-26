@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="113dp"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:id="@+id/ll11"
+        android:layout_width="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/margin_20dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageview"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="17dp"
+        android:gravity="center_vertical"
+        android:layout_toRightOf="@+id/ll11"
+        >
+
+<TextView
+    android:id="@+id/pro_name"
+    android:layout_width="180dp"
+    android:layout_height="wrap_content"
+    android:text="紫米面包字谜奶酪面包"
+    android:maxLines="1"
+    android:textColor="@color/black"
+    android:textSize="12dp"
+    />
+
+        <TextView
+            android:id="@+id/pro_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="x1"
+            android:textColor="#5a5a5a"
+            android:layout_marginTop="7dp"
+            android:textSize="12dp"
+            />
+        <TextView
+            android:id="@+id/pro_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥5.00"
+            android:textColor="#5a5a5a"
+            android:layout_marginTop="15dp"
+            android:textSize="12dp"
+            />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/pingjia"
+        android:layout_width="56dp"
+        android:layout_height="27dp"
+        android:background="@drawable/shape_corner2"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="26dp"
+        android:layout_marginRight="13dp"
+        android:text="评价"
+        android:gravity="center"
+        android:textColor="@color/white"
+        />
+
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/devide_line"
+    android:layout_alignParentBottom="true"
+    />
+</RelativeLayout>

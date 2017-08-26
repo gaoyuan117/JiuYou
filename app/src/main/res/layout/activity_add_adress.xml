@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.jiuyou.ui.activity.AddAdressActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <EditText
+        android:id="@+id/et_add_adress_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:hint="姓名"
+        android:paddingBottom="14dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="@dimen/margin_20dp"
+        android:paddingTop="14dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#a8a9aa" />
+
+    <EditText
+        android:id="@+id/et_add_adress_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:hint="手机号"
+        android:paddingBottom="14dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="@dimen/margin_20dp"
+        android:inputType="phone"
+        android:paddingTop="14dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#a8a9aa" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_add_adress_sheng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:focusable="false"
+            android:paddingBottom="14dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="@dimen/margin_20dp"
+            android:paddingTop="14dp"
+            android:text="省" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/margin_20dp"
+            android:src="@mipmap/grzx_dizhiguanli_gengduo" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#a8a9aa" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_add_adress_shi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:focusable="false"
+            android:paddingBottom="14dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="@dimen/margin_20dp"
+            android:paddingTop="14dp"
+            android:text="市" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/margin_20dp"
+            android:src="@mipmap/grzx_dizhiguanli_gengduo" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#a8a9aa" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_add_adress_qu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:focusable="false"
+            android:paddingBottom="14dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="@dimen/margin_20dp"
+            android:paddingTop="14dp"
+            android:text="区/县" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/margin_20dp"
+            android:src="@mipmap/grzx_dizhiguanli_gengduo" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#a8a9aa" />
+
+    <EditText
+        android:id="@+id/et_add_adress_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:hint="详细地址"
+        android:paddingBottom="14dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="@dimen/margin_20dp"
+        android:paddingTop="14dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#a8a9aa" />
+
+</LinearLayout>

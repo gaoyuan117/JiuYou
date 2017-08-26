@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_advertise_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+    <!--</RelativeLayout>-->
+
+    <com.jiuyou.customctrls.CountDownView
+        android:id="@+id/tv_advertise_count_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bg_count_down"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="跳过  4s"
+        android:textColor="#ffffff"
+        android:textSize="12dp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/roundBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:visibility="gone"
+        android:background="@drawable/main_menu_btnshape"
+        android:text="@string/splash_text" />
+
+    <LinearLayout
+        android:id="@+id/ll_in"
+        android:layout_width="264dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/login_click_selector"
+        android:layout_marginBottom="87.5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/submit_in"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

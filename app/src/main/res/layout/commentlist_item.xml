@@ -1,0 +1,87 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_main"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <com.jiuyou.customctrls.CircleImageView
+                android:id="@+id/comment_portrait"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/icon_personal_center_user_head"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="张三张三张三"
+                    android:textColor="#34201f"
+                    android:textStyle="bold"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_leave_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:text="2013.11.20 12:20:21"
+                android:textColor="#a09797"
+                android:textSize="10dip" />
+
+            <TextView
+                android:id="@+id/tv_leave_connect"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="20dp"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="通话小说是以通话的形式写成，适合儿童的心理水平和知识状态，以供儿童接受阅读的小说。童话小说因为以儿童作为阅读受体所以要以儿童的知识眼光作为艺术视角来进行创作。"
+                android:textColor="#321f1c"
+                android:textSize="12dip" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eeeeee"></LinearLayout>
+
+</LinearLayout>

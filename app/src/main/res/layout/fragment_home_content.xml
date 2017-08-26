@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efefef"
+    android:orientation="vertical">
+
+    <com.shoping.customctrls.CustomSwipRefresh
+        android:id="@+id/mSrlRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.shoping.customctrls.HomeLoadMoreListview
+            android:id="@+id/mlistview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+    </com.shoping.customctrls.CustomSwipRefresh>
+
+
+</LinearLayout>

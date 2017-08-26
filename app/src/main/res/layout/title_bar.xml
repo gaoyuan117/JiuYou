@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="48dp"
+    android:gravity="center"
+    android:background="#E04A46"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/appBg"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/ib_titlebar"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/tv_edit"
+            android:layout_width="47dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:text="@string/edit"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/ll_top"
+        android:background="#edf1f2" />
+
+</LinearLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp">
+
+    <RelativeLayout
+        android:id="@+id/rl_toptitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/appBg">
+        <ImageButton
+            android:id="@+id/ib_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:visibility="gone"
+            android:background="@drawable/btn_back_selector" />
+
+        <TextView
+            android:id="@+id/popBtn"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="@dimen/pmtsize" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/popBtn"
+            android:background="@drawable/drop_down" />
+
+        <ImageButton
+            android:id="@+id/ib_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:visibility="gone"
+            android:background="@drawable/search" />
+    </RelativeLayout>
+</RelativeLayout>

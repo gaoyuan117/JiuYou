@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<com.dedou.customctrls.SpecailView-->
+    <!--android:id="@+id/specail_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="400dip"-->
+    <!--android:background="#78675645" >-->
+    <!--<com.dedou.customctrls.SpecailButton-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@drawable/liu"-->
+    <!--android:gravity="center"-->
+    <!--android:text="数学"/>-->
+    <!--</com.dedou.customctrls.SpecailView>-->
+    <include layout="@layout/primaryschool" />
+
+    <include layout="@layout/middleschool" />
+
+    <include layout="@layout/highschool" />
+
+    <include layout="@layout/folatinglayer" />
+</RelativeLayout>

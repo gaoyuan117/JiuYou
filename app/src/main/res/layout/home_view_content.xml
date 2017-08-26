@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F1F1"
+    android:orientation="vertical">
+
+    <com.jiuyou.customctrls.CustomSwipRefresh
+        android:id="@+id/refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <com.jiuyou.customctrls.MyScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.jiuyou.customctrls.ImageCycleView
+                    android:id="@+id/homebanner1"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#F1F1F1"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@mipmap/zuo" />
+
+                    <TextView
+                        android:id="@+id/pro_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="25dp"
+                        android:text="全部商品"
+                        android:textColor="#DF4946"
+                        android:textSize="14dp" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@mipmap/you" />
+
+                </LinearLayout>
+
+                <com.jiuyou.customctrls.MyGridView
+                    android:id="@+id/gridview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#F1F1F1"
+                    android:columnWidth="90dp"
+                    android:gravity="center"
+                    android:horizontalSpacing="3dp"
+                    android:numColumns="2"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="3dp" />
+            </LinearLayout>
+
+        </com.jiuyou.customctrls.MyScrollView>
+    </com.jiuyou.customctrls.CustomSwipRefresh>
+
+
+</LinearLayout>

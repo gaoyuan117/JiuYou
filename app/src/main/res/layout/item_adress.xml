@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tv_adress_p"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="山东省"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_adress_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="14763766689"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_adress_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:text="【默认】山东省济南市高新区"
+        android:textColor="@color/text_gray" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_adress"
+            android:focusable="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_weight="1"
+            android:button="@drawable/adress_selector"
+            android:drawablePadding="4dp"
+            android:paddingLeft="4dp"
+            android:text="默认地址" />
+
+        <TextView
+            android:id="@+id/tv_adress_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:drawableLeft="@mipmap/icon_bianji"
+            android:drawablePadding="4dp"
+            android:text="编辑"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_adress_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:drawableLeft="@mipmap/icon_shanchu2"
+            android:drawablePadding="4dp"
+            android:text="删除"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

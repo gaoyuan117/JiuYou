@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/nonghong_color1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="15dp">
+
+        <ImageView
+            android:id="@+id/search_filter"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/icon_feilei" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="31dp"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="8"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_weight="8"
+                android:background="@color/nonghong_color1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/icon_sousuo" />
+
+                <TextView
+                    android:id="@+id/edt_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:maxLength="10"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:text="@string/tip_search"
+                    android:textColor="#F2baba"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_marginLeft="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/white" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/erweima"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:src="@mipmap/icon_saoyisao" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/margin"
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        android:layout_below="@+id/tv_cancel"
+        android:background="@color/nonghong_color1" />
+</LinearLayout>

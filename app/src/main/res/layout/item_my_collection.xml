@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_click_selector">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/item_click_selector"
+        >
+        <RelativeLayout
+            android:id="@+id/rl_left"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:visibility="gone"
+            >
+            <CheckBox
+                android:id="@+id/cb_collection"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:button="@drawable/checkbox_checked_style"
+               />
+            <View
+                android:id="@+id/check_view"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/checkbox_default"
+                />
+        </RelativeLayout>
+
+        
+        <View
+            android:id="@+id/devide_view"
+            android:layout_width="24dp"
+            android:layout_toRightOf="@+id/rl_left"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/iv_subject_Pic"
+            android:layout_width="88dp"
+            android:layout_height="49.5dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/devide_view"
+            android:layout_gravity="center_vertical"
+           />
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="200dp"
+            android:layout_centerVertical="true"
+            android:layout_height="49.5dp"
+            android:layout_toRightOf="@+id/iv_subject_Pic"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="4dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_subject_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="有理数*************"
+                android:textColor="@color/result_textcolor1"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/circle_bg" />
+
+                <TextView
+                    android:id="@+id/tv_one_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:text="一级目录"
+                    android:textColor="@color/result_textcolor2"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:textColor="@color/result_textcolor2"/>
+
+                <TextView
+                    android:id="@+id/tv_second_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="二级目录"
+                    android:textColor="@color/result_textcolor2"
+                    android:textSize="12dp"
+                    android:maxLines="1"
+                    android:ellipsize="end" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="31dp"
+            android:layout_alignParentRight="true"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="12dp"
+            android:src="@drawable/more" />
+    </RelativeLayout>
+
+</RelativeLayout>

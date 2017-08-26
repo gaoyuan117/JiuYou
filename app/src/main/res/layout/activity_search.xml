@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/title_bar_common_rv_viewGroup"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#E04A46"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/title_bar_common_iv_operate_1"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:background="@drawable/selector_item_press_touming"
+            android:clickable="true"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_fanhui" />
+
+        <com.jiuyou.customctrls.FontTextView
+            android:id="@+id/title_bar_common_tv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:paddingBottom="6dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="6dp"
+            android:text="搜索"
+            android:textColor="#FFFCFA" />
+
+        <LinearLayout
+            android:layout_marginLeft="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@id/title_bar_common_tv_search"
+            android:layout_toRightOf="@id/title_bar_common_iv_operate_1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <com.jiuyou.customctrls.ClearEditText
+                android:id="@+id/title_bar_common_et_search"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_find_job_search"
+                android:drawableLeft="@drawable/icon_sousuo"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:hint="请输入关键字"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:textColor="#FFFCFA"
+                android:textColorHint="#E0B7B9"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/white" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5F5F5">
+
+        <GridView
+            android:id="@+id/gridview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:columnWidth="90dp"
+            android:gravity="center"
+            android:horizontalSpacing="3dp"
+            android:numColumns="2"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="3dp" />
+
+        <RelativeLayout
+            android:id="@+id/rl_nogoods"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/iv_biaoqing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/icon_biaoqing" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_biaoqing"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:gravity="center_horizontal"
+                android:text="您没有搜索到该商品"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

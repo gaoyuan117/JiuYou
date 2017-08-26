@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f6f7"
+    android:orientation="vertical"
+    tools:context="com.jiuyou.ui.activity.ReturnMoneyActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_refuse_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:background="@color/white"
+                android:padding="14dp"
+                android:text="单号：124325259827"
+                android:textColor="@color/text_black"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_20dp"
+                android:text="请选择退货理由"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:orientation="vertical">
+
+
+                <RadioButton
+                    android:id="@+id/rg_refuse_jia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/rg_selector"
+                    android:padding="10dp"
+                    android:text="此商品为非正品"
+                    android:textColor="@color/text_gray"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/rg_refuse_po"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/rg_selector"
+                    android:padding="10dp"
+                    android:text="商品破损"
+                    android:textColor="@color/text_gray"
+                    android:textSize="18sp" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:text="其他"
+                android:textColor="@color/text_gray"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_refuse_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:background="@drawable/input_bg"
+                android:padding="@dimen/margin_10dp">
+
+                <EditText
+                    android:textSize="12sp"
+                    android:id="@+id/et_refuse_other"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="请填写拒绝收货的理由" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_refuse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="46dp"
+                android:background="@color/bg_red"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="确定"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

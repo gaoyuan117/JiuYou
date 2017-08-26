@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:background="#f5f5f5"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/layout5"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="@dimen/margin_15dp"
+        android:background="@color/white"
+        android:padding="5dp" >
+
+        <CheckBox
+            android:id="@+id/ck_select"
+            style="@style/MyCheckboxStyle"
+            android:layout_width="wrap_content"
+            android:focusable="false"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"/>
+
+        <com.jiuyou.customctrls.RoundImageView
+            android:id="@+id/pic_goods"
+            android:layout_width="64dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/color_goods"
+                            android:layout_width="135dp"
+                            android:layout_height="38dp"
+                            android:text="紫米面包紫米奶酪面包紫米面包紫米奶酪面包紫米面包紫米奶酪面包紫米面包紫米奶酪面包"
+                            android:maxLines="2"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/integral_goods"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="¥3.00"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/xn_red"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_gravity="bottom"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="13dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_gravity="right"
+                        android:background="@color/white"
+                        android:orientation="horizontal" >
+
+                        <Button
+                            android:id="@+id/minus"
+                            android:layout_width="@dimen/margin_15dp"
+                            android:layout_height="@dimen/margin_15dp"
+                            android:background="@drawable/icon_jianhao_kedainji"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:focusable="false"
+                            android:layout_marginRight="8dp"
+                            android:textColor="@color/black" >
+                        </Button>
+
+                        <TextView
+                            android:id="@+id/number"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/yunajiaojuxing"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:text="1"
+                            android:textColor="@color/black" >
+                        </TextView>
+
+                        <Button
+                            android:id="@+id/plus"
+                            android:layout_width="@dimen/margin_15dp"
+                            android:layout_height="@dimen/margin_15dp"
+                            android:background="@drawable/icon_jiahao"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:focusable="false"
+                            android:layout_marginLeft="8dp"
+                            android:textColor="@color/black" >
+                        </Button>
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+

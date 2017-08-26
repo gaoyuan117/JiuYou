@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rl_update_root"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25.5dp"
+        android:layout_marginLeft="25.5dp"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:orientation="vertical"
+        android:background="@drawable/alert_bg"
+        android:layout_centerHorizontal="true">
+        
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="40dp"
+            android:paddingTop="40dp">
+
+            <ProgressBar
+                android:id="@+id/myView_ProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="200dp"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/update_progress" />
+
+            <TextView
+                android:id="@+id/tvProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@id/myView_ProgressBar"
+                android:text="0%"
+                android:textColor="#000" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/alertdialog_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/tv_progress_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="43dp"
+                android:layout_weight="1"
+                android:background="@drawable/alertdialog_left_selector"
+                android:gravity="center"
+                android:text="@string/cancel"
+                android:textColor="@color/login_cancle"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
+
+

@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+    <TextView
+        android:id="@+id/tv_classone"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/middle_school_color"
+        android:gravity="center"
+        android:text="@string/class_two"
+        android:textColor="@color/primary_text_color"
+        android:textSize="@dimen/pmtsize" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp" />
+
+    <TextView
+        android:id="@+id/tv_classtwo"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/high_school_color"
+        android:gravity="center"
+        android:text="@string/class_three"
+        android:textColor="@color/primary_text_color"
+        android:textSize="@dimen/pmtsize" />
+
+
+</LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f3f4f5"
+    android:orientation="vertical"
+    tools:context="com.jiuyou.ui.activity.PaySuccess2Activity">
+
+    <include layout="@layout/layout_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:drawablePadding="@dimen/margin_20dp"
+            android:drawableTop="@mipmap/icon_zhifuchenggong"
+            android:text="支付成功!"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/tv_success_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp"
+            android:layout_marginTop="50dp"
+            android:src="@mipmap/gouwuche_fanhuishouye" />
+    </LinearLayout>
+</LinearLayout>

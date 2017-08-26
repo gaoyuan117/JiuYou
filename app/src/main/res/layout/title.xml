@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/rl_title"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="45dp"
+        android:layout_height="48dp"
+        android:onClick="exit"
+        android:scaleType="centerInside"
+        android:src="@drawable/icon_guanbi"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/title_size"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:layout_below="@+id/btn_back"
+        android:background="@color/divider_color"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/translate"/>
+</RelativeLayout>

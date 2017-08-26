@@ -1,0 +1,87 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_main"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <com.jiuyou.customctrls.RoundImageView
+                android:id="@+id/comment_portrait"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="left"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="张三张三张三张三张三张三张三张三张三"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/tv_leave_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="2013.11.20 12:20:21"
+                    android:textColor="#a09797"
+                    android:textSize="10dip" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_leave_connect"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="13dp"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="童话小说因为以儿童作为阅读受体所以要以儿童的知识眼光作为艺术视角来进行创作。"
+                android:textColor="@color/text_black"
+                android:textSize="12dip" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eeeeee" />
+
+</LinearLayout>

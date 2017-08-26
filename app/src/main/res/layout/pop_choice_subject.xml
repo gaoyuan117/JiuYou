@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="83dp"
+    android:background="@color/item_clicked"
+    android:orientation="vertical">
+<View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@color/line"
+    />
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="科目:"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/result_textcolor1"
+            android:textSize="12dp"
+            />
+        <com.shoping.customctrls.MyGridView
+            android:id="@+id/my_gridView"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16.5dp"
+            android:layout_marginBottom="17dp"
+           android:layout_toRightOf="@id/subject"
+            android:verticalSpacing="16.5dp"
+            android:cacheColorHint="#00000000"
+            android:numColumns="5" />
+    </RelativeLayout>
+        
+
+
+</LinearLayout>

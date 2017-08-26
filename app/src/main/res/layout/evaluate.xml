@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/title_bar_common_rv_viewGroup"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#E04A46">
+
+        <ImageView
+            android:id="@+id/title_bar_operate_1"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:background="@drawable/selector_item_press_touming"
+            android:clickable="true"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_fanhui" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发表评价"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@+id/et_baby_problem"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@color/white"
+            android:gravity="top|left"
+            android:hint="宝贝满足了你的期待吗？说说它的优点和缺点吧"
+            android:paddingLeft="11.5dp"
+            android:textColorHint="@color/text_hint_color"
+            android:textColor="@color/search_itemcolor"
+            android:textSize="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="15dp"
+            android:lineSpacingExtra="3dp"
+            android:maxLength="300"/>
+
+        <TextView
+            android:id="@+id/tv_feedback_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5.5dp"
+            android:layout_marginRight="14.5dp"
+            android:text=""
+            android:textColor="#999"
+            android:textSize="13dp" />
+    </RelativeLayout>
+    <Button
+        android:id="@+id/submit_bt"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="98dp"
+        android:text="发布"
+        android:textSize="15sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/shape_corner10"
+        />
+</LinearLayout>

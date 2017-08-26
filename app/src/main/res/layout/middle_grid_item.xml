@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="0.0dip"
+    android:background="@drawable/bg_gv">
+
+    <RelativeLayout
+        android:layout_width="118dp"
+        android:layout_height="118dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/btn_middle_selector">
+
+        <ImageView
+            android:id="@+id/iv_item"
+            android:layout_width="117dp"
+            android:layout_height="117dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/shuxue"
+            android:contentDescription="@string/app_name" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

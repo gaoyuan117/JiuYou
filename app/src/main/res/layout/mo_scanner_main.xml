@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/mo_scanner_bg" >
+
+    <SurfaceView
+        android:id="@+id/mo_scanner_preview_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:background="@drawable/mo_scanner_bg" />
+
+    <com.jiuyou.ui.activity.saomiao.view.ViewfinderView
+        android:id="@+id/mo_scanner_viewfinder_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/mo_scanner_bg" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/mo_scanner_back"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:src="@drawable/mo_scanner_back_img" />
+
+        <ImageView
+            android:id="@+id/mo_scanner_photo"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:src="@drawable/mo_scanner_album" />
+
+        <ImageView
+            android:id="@+id/mo_scanner_light"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:src="@drawable/mo_scanner_light_light" />
+    </LinearLayout>
+
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal"
+        android:text="二维码 扫描"
+        android:layout_marginBottom="70dp"
+        />
+    <RelativeLayout
+        android:id="@+id/title_bar_common_rv_viewGroup"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#E04A46"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/title_bar_operate_1"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:background="@drawable/selector_item_press_touming"
+            android:clickable="true"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_fanhui" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="扫一扫"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            />
+    </RelativeLayout>
+</FrameLayout>
