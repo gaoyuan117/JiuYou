@@ -31,8 +31,8 @@ import butterknife.ButterKnife;
 
 
 public class ForgetPWDActivity extends BaseActivity {
-     @Bind(R.id.edt_pay_phone)
-     EditText edt_register_phone;
+    @Bind(R.id.edt_pay_phone)
+    EditText edt_register_phone;
     @Bind(R.id.tip_number)
     TextView tip_number;
     @Bind(R.id.edt_pay_yz)
@@ -60,6 +60,7 @@ public class ForgetPWDActivity extends BaseActivity {
     private String type = "register";
     boolean isPhone = false, isPwd = false;
     CheckPhoneAndPwd checkPhoneAndPwd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,10 +107,10 @@ public class ForgetPWDActivity extends BaseActivity {
                 if (TextUtils.isEmpty(phone) || phone.length() < 11) {
                     ToastUtil.show("请输入正确的手机号码");
                     return;
-                         }
-                        stratNetWork();
-                    }
-                });
+                }
+                stratNetWork();
+            }
+        });
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,28 +118,28 @@ public class ForgetPWDActivity extends BaseActivity {
                 if (CheckInput()) {
                     //密碼重置
                     getLoadingDataBar().show();
-                    Log.e(AppConfig.TAG,"resertword==="+MD5Utils.md5(pwd1.toString().trim().getBytes()));
-                    UserUtils.getResetPWD(MD5Utils.md5(pwd1.toString().trim().getBytes()), MD5Utils.md5(pwd2.toString().trim().getBytes()), phone, code, new UserUtils.getResetPWDListener() {
+                    Log.e(AppConfig.TAG, "resertword===" + MD5Utils.toMD5(pwd1.toString().trim()));
+                    UserUtils.getResetPWD(MD5Utils.toMD5(pwd1.toString().trim()), MD5Utils.toMD5(pwd2.toString().trim()), phone, code, new UserUtils.getResetPWDListener() {
                         @Override
                         public void load(boolean status, GoodsResponse info, String message) {
-                                if(status){
-                                    ToastUtil.show("密码重置成功");
-                                    ForgetPWDActivity.this.finish();
-                                }else{
-                                    ToastUtil.show(message);
-                                }
-                                closeProgressBar();
+                            if (status) {
+                                ToastUtil.show("密码重置成功");
+                                ForgetPWDActivity.this.finish();
+                            } else {
+                                ToastUtil.show(message);
+                            }
+                            closeProgressBar();
                         }
                     });
 
 
-                    if (!TextUtils.isEmpty(verity)  ) {
+                    if (!TextUtils.isEmpty(verity)) {
                         if (verity.equals(edt_register_yz.getText().toString())) {
                             startActivity();
-                        }else{
+                        } else {
                             Toast.makeText(ForgetPWDActivity.this, "请输入正确验证码", Toast.LENGTH_SHORT).show();
                         }
-                    }else {
+                    } else {
                         Toast.makeText(ForgetPWDActivity.this, "请获取验证码", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -170,15 +171,15 @@ public class ForgetPWDActivity extends BaseActivity {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            String s = editable.toString();
-            if (checkPhoneAndPwd.checkIsPhone(s)) {
-                btn_register.setEnabled(true);
-            } else {
-                btn_register.setEnabled(false);
-                if (s.length() == 11) {
-                    ToastUtil.show("请输入正确的手机号");
-                }
-            }
+//            String s = editable.toString();
+//            if (checkPhoneAndPwd.checkIsPhone(s)) {
+//                btn_register.setEnabled(true);
+//            } else {
+//                btn_register.setEnabled(false);
+//                if (s.length() == 11) {
+//                    ToastUtil.show("请输入正确的手机号");
+//                }
+//            }
         }
     };
     TextWatcher pwdTextWatch = new TextWatcher() {
@@ -233,6 +234,7 @@ public class ForgetPWDActivity extends BaseActivity {
             setResetBtnStatus();
         }
     };
+
     private void setResetBtnStatus() {
         if (isPhone && isPwd) {
             btn_register.setEnabled(true);
@@ -240,17 +242,18 @@ public class ForgetPWDActivity extends BaseActivity {
             btn_register.setEnabled(false);
         }
     }
+
     private void stratNetWork() {
         getLoadingDataBar().show();
         UserUtils.getVerifyInfo(phone, AppConfig.FORGOTTEN, new UserUtils.getLoginListener() {
             @Override
             public void load(boolean status, GoodsResponse info, String message) {
-                if(status){
+                if (status) {
                     ToastUtil.show("验证码已经发送");
                     startTimer();
-                    verity=info.getData().getVerify();
-                    Log.e(AppConfig.TAG, "verity===="+verity);
-                }else{
+                    verity = info.getData().getVerify();
+                    Log.e(AppConfig.TAG, "verity====" + verity);
+                } else {
                     ToastUtil.show(message);
                 }
                 closeProgressBar();
@@ -282,11 +285,12 @@ public class ForgetPWDActivity extends BaseActivity {
                     tip_number.setEnabled(false);
                     tip_number.setTextColor(getResources().getColor(R.color.hint_color));
                     total--;
-                    tip_number.setText(total+"秒后重试" );
+                    tip_number.setText(total + "秒后重试");
                 }
             }
         }
     };
+
     private void startActivity() {
 //        Intent intent = new Intent(RegisterActivity.this, SetPasswordActivity.class);
 //        intent.putExtra("phone", phone);
@@ -305,16 +309,16 @@ public class ForgetPWDActivity extends BaseActivity {
             return false;
         }
         code = edt_register_yz.getText().toString();
-        if (!TextUtils.isEmpty(code) &&verity!=null ) {
+        if (!TextUtils.isEmpty(code) && verity != null) {
             if (!verity.equals(code)) {
                 Toast.makeText(ForgetPWDActivity.this, "请输入正确验证码", Toast.LENGTH_SHORT).show();
                 return false;
             }
-        }else {
+        } else {
             Toast.makeText(ForgetPWDActivity.this, "请获取验证码", Toast.LENGTH_SHORT).show();
             return false;
         }
-        pwd1 =edt_reset_pwd.getText().toString().trim();
+        pwd1 = edt_reset_pwd.getText().toString().trim();
         if (TextUtils.isEmpty(pwd1)) {
             ToastUtil.show("新密码不能为空");
             return false;
@@ -324,7 +328,7 @@ public class ForgetPWDActivity extends BaseActivity {
             ToastUtil.show("新密码不能少于6位");
             return false;
         }
-        pwd2 =edt_reset_pwd2.getText().toString().trim();
+        pwd2 = edt_reset_pwd2.getText().toString().trim();
         if (TextUtils.isEmpty(pwd2)) {
             ToastUtil.show("再次输入的新密码不能为空");
             return false;
@@ -333,12 +337,13 @@ public class ForgetPWDActivity extends BaseActivity {
             ToastUtil.show("再次输入的新密码不能少于6位");
             return false;
         }
-        if(!pwd1.equals(pwd2)){
+        if (!pwd1.equals(pwd2)) {
             ToastUtil.show("两次输入的密码不相同");
             return false;
         }
         return true;
     }
+
     /**
      * 如果手机号正常的话，返回null
      */
@@ -347,12 +352,12 @@ public class ForgetPWDActivity extends BaseActivity {
             ToastUtil.show("手机号不能为空");
             return false;
         }
-        if (!phone.matches(phoneRegex)) {
-            ToastUtil.show("手机号格式不对");
-            return false;
-        }
+//        if (!phone.matches(phoneRegex)) {
+//            ToastUtil.show("手机号格式不对");
+//            return false;
+//        }
         return true;
     }
 
-    String phoneRegex = "^1[35789]\\d{9}$";
+//    String phoneRegex = "^1[345789]\\d{9}$";
 }

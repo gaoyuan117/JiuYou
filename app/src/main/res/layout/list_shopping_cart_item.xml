@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="7dp"/>
 
-        <com.jiuyou.customctrls.RoundImageView
+        <ImageView
             android:id="@+id/pic_goods"
             android:layout_width="64dp"
             android:layout_height="50dp"

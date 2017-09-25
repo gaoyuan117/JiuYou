@@ -53,16 +53,16 @@ public class EvaluateActivity extends BaseActivity {
         title_bar_operate_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!et_baby_problem.getText().toString().trim().equals("")) {
+//                if (!et_baby_problem.getText().toString().trim().equals("")) {
                     PopUtil.showDialog(EvaluateActivity.this, "退出确认", "确认取消发布吗？", "取消", "确定退出", null, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             EvaluateActivity.this.finish();
                         }
                     });
-                } else {
-                    EvaluateActivity.this.finish();
-                }
+//                } else {
+//                    EvaluateActivity.this.finish();
+//                }
             }
         });
         et_baby_problem.addTextChangedListener(new CommonUtil.TextNoEmojiWatcher(et_baby_problem, EvaluateActivity.this));
@@ -119,16 +119,16 @@ public class EvaluateActivity extends BaseActivity {
         }
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && event.getAction() == KeyEvent.ACTION_DOWN) {
-            if (!et_baby_problem.getText().toString().trim().equals("")) {
+//            if (!et_baby_problem.getText().toString().trim().equals("")) {
                 PopUtil.showDialog(EvaluateActivity.this, "退出确认", "确认取消发布吗？", "取消", "确定退出", null, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         EvaluateActivity.this.finish();
                     }
                 });
-            } else {
-                EvaluateActivity.this.finish();
-            }
+//            } else {
+//                EvaluateActivity.this.finish();
+//            }
             return true;
         }
         return super.onKeyDown(keyCode, event);

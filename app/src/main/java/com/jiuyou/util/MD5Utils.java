@@ -24,8 +24,11 @@
 
 package com.jiuyou.util;
 
+import com.jiuyou.wxpay.MD5;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collections;
 
 /**
  * MD5工具类
@@ -55,7 +58,7 @@ public class MD5Utils {
 
     private static MessageDigest digest;
 
-    static{
+    static {
         try {
             digest = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
@@ -64,36 +67,33 @@ public class MD5Utils {
         }
     }
 
-    /**
-     * MD5加密
-     * @param key
-     * @return
-     */
-    public static String toMD5(String key){
-        if(digest == null){
-            return String.valueOf(key.hashCode());
+
+    public static String toMD5(String val) {
+        MessageDigest md5 = null;
+        try {
+            md5 = MessageDigest.getInstance("MD5");
+            md5.update(val.getBytes());
+            byte[] m = md5.digest();//加密
+            return getString(m);
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
-        //更新字节
-        digest.update(key.getBytes());
-        //获取最终的摘要  十进制的  12345678/ABCD1245
-        return convert2HexString(digest.digest());
+        return "";
     }
 
-    /**
-     * 转为16进制字符串
-     * @param bytes
-     * @return
-     */
-    private static String convert2HexString(byte[] bytes) {
+    private static String getString(byte[] b) {
         StringBuffer sb = new StringBuffer();
-        for (byte b : bytes) {
-            //->8->08
-            String hex = Integer.toHexString(0xFF & b);
-            if(hex.length() == 1){
-                sb.append('0');
+        for (int i = 0; i < b.length; i++) {
+            int num = b[i] & 0xff; // 这里的是为了将原本是byte型的数向上提升为int型，从而使得原本的负数转为了正数
+            String hex = Integer.toHexString(num); //这里将int型的数直接转换成16进制表示
+            if (hex.length() == 1) {
+                sb.append(0);
             }
             sb.append(hex);
         }
-        return sb.toString();
+        Log.e("gy", "sb：" + sb.toString());
+        String s = sb.toString().toUpperCase();
+        return s;
     }
 }

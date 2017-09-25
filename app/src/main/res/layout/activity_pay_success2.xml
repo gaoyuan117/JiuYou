@@ -23,6 +23,7 @@
             android:layout_marginTop="50dp"
             android:drawablePadding="@dimen/margin_20dp"
             android:drawableTop="@mipmap/icon_zhifuchenggong"
+            android:gravity="center"
             android:text="支付成功!"
             android:textSize="16sp" />
 

@@ -42,9 +42,14 @@ public class SelectAdressActivity extends BaseActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_adress);
         ButterKnife.bind(this);
-        setCenterTitle("选择城市");
 
         type = getIntent().getStringExtra("type");
+
+        if (type.equals("sheng")) {
+            setCenterTitle("选择省份");
+        } else {
+            setCenterTitle("选择城市");
+        }
         Log.e("gy", "type " + type);
         init();
         mListView.setOnItemClickListener(this);

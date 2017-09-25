@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jiuyou.R;
 import com.jiuyou.core.AppContext;
 import com.jiuyou.customctrls.CircleImageView;
@@ -72,10 +73,13 @@ public class CommentListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         Integer time=Integer.parseInt(list.get(position).getComm_time()==null?"0":list.get(position).getComm_time());
-        holder.tv_leave_time.setText(DateUtils.transForDate1(time));
+        holder.tv_leave_time.setText(DateUtils.transForDate4(time));
         holder.tv_name.setText(list.get(position).getNickname());
         holder.tv_leave_connect.setText(list.get(position).getComment());
-        AppContext.getInstance().getImageLoader().displayImage(AppConfig.ENDPOINTPIC+list.get(position).getAvatar(),holder.comment_portrait);
+
+        Glide.with(mContext).load(AppConfig.ENDPOINTPIC+list.get(position).getAvatar())
+                .error(R.mipmap.logo)
+                .into(holder.comment_portrait);
         return convertView;
     }
     static class ViewHolder {

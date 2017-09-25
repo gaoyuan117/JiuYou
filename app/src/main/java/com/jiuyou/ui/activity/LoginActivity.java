@@ -25,7 +25,7 @@ import com.jiuyou.util.ToastUtil;
 
 public class LoginActivity extends BaseActivity {
 
-    String phoneRegex = "^1[35789]\\d{9}$";
+    String phoneRegex = "^1[345789]\\d{9}$";
     EditText nameEdt, pwdEdt;
     Button loginBtn;
     CheckPhoneAndPwd checkPhoneAndPwd;
@@ -185,8 +185,8 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         getLoadingDataBar().show();
-        Log.e(AppConfig.TAG, "loginpassword===" + MD5Utils.md5(pwd.getBytes()));
-        UserUtils.getLoginInfo(phone, MD5Utils.md5(pwd.getBytes()), AppConfig.driver, new UserUtils.getLoginListener() {
+        Log.e(AppConfig.TAG, "loginpassword===" + MD5Utils.toMD5(pwd));
+        UserUtils.getLoginInfo(phone, MD5Utils.toMD5(pwd), AppConfig.driver, new UserUtils.getLoginListener() {
             @Override
             public void load(boolean status, GoodsResponse info, String message) {
                 if (status) {
@@ -196,6 +196,7 @@ public class LoginActivity extends BaseActivity {
                     new SharedPreference("token").edit()
                             .putString("token", info.getData().getToken())
                             .putString("uid", info.getData().getUid())
+                            .putString("phone", phone)
                             .commit();
                     LoginActivity.this.finish();
                 } else {

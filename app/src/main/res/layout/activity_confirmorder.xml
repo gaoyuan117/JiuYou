@@ -35,11 +35,12 @@
     </RelativeLayout>
 
     <ScrollView
+        android:layout_below="@+id/title_bar_common_rv_viewGroup"
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/title_bar_common_rv_viewGroup"
-        android:layout_centerVertical="true">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,19 +89,23 @@
                     android:drawablePadding="14dp"
                     android:paddingBottom="16dp"
                     android:paddingLeft="16dp"
+                    android:drawableRight="@mipmap/grzx_dingdan_gengduo"
                     android:paddingRight="16dp"
-                    android:text="暂无收货地址，请添加"
+                    android:text="点击选择收货地址"
                     android:textColor="@color/text_gray" />
             </LinearLayout>
 
             <TextView
+                android:gravity="center"
+                android:visibility="visible"
                 android:id="@+id/tv_confirm_order_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#f3f4f5"
+                android:textColor="@color/text_black"
                 android:drawableRight="@mipmap/grzx_dingdan_gengduo"
-                android:padding="16dp"
-                android:text="暂无收货地址请前往添加" />
+                android:padding="24dp"
+                android:text="点击选择收货地址" />
 
 
             <com.jiuyou.customctrls.MyListView
@@ -173,6 +178,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:text="请选择取货方式"
                     android:id="@+id/tv_confirm_order_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -233,10 +239,11 @@
                     android:id="@+id/ib_weixin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/margin_15dp"
-                    android:background="@mipmap/icon_fuxuankuan_xuanzhong" />
+                    android:background="@mipmap/icon_fuxuankuan_weixuan"
+                    android:layout_alignTop="@+id/iv12"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="15dp" />
 
             </RelativeLayout>
 
@@ -278,7 +285,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/margin_15dp"
-                    android:background="@mipmap/icon_fuxuankuan_weixuan" />
+                    android:background="@mipmap/icon_fuxuankuan_xuanzhong" />
 
             </RelativeLayout>
 
@@ -365,37 +372,40 @@
                     android:layout_marginRight="@dimen/margin_15dp"
                     android:background="@drawable/icon_fuxuankuan_weixuan" />
             </RelativeLayout>
+
+            <LinearLayout
+                android:layout_marginTop="80dp"
+                android:id="@+id/ll_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_alignParentBottom="true">
+
+                <TextView
+                    android:id="@+id/tv_zongji"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="#515151"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="18dp"
+                    android:text="总计¥5.00"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_tijiao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#e04a46"
+                    android:gravity="center"
+                    android:paddingLeft="18dp"
+                    android:text="提交订单"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/ll_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_alignParentBottom="true">
-
-        <TextView
-            android:id="@+id/tv_zongji"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:background="#515151"
-            android:gravity="center_vertical"
-            android:paddingLeft="18dp"
-            android:text="总计¥5.00"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/tv_tijiao"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#e04a46"
-            android:gravity="center"
-            android:paddingLeft="18dp"
-            android:text="提交订单"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
 
 </RelativeLayout>

@@ -48,12 +48,25 @@ public class DataBanner extends AbstractResponse implements Serializable {
     private String quantity;
     @ParamName("product_id")
     private String product_id;
+    @ParamName("old_price")
+    private String old_price;
+
+    public String getOld_price() {
+        return old_price;
+    }
+
+    public void setOld_price(String old_price) {
+        this.old_price = old_price;
+    }
+
     public String getQuantity() {
         return quantity;
     }
+
     public String getProduct_id() {
         return product_id;
     }
+
     public String getId() {
         return id;
     }

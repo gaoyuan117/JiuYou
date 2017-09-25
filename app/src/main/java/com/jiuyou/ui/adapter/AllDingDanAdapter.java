@@ -120,7 +120,7 @@ public class AllDingDanAdapter extends BaseAdapter {
             holder.llAllAdd.setVisibility(View.GONE);//验证真伪.确认收货.拒绝收货
 
         } else if (status.equals("2")) {
-            holder.tvAllDdStatus.setText("退款中");
+            holder.tvAllDdStatus.setText("申请退款");
 
             holder.imgAllDdZhifu.setVisibility(View.GONE);//立即支付
             holder.imgAllDdQuxiao.setVisibility(View.GONE);//取消订单
@@ -153,7 +153,7 @@ public class AllDingDanAdapter extends BaseAdapter {
             holder.llAllAdd.setVisibility(View.GONE);//验证真伪.确认收货.拒绝收货
 
         } else if (status.equals("5")) {
-            holder.tvAllDdStatus.setText("等待配送员接单");
+            holder.tvAllDdStatus.setText("等待接单");
 
             holder.imgAllDdZhifu.setVisibility(View.GONE);//立即支付
             holder.imgAllDdQuxiao.setVisibility(View.GONE);//取消订单
@@ -164,7 +164,7 @@ public class AllDingDanAdapter extends BaseAdapter {
             holder.llAllAdd.setVisibility(View.GONE);//验证真伪.确认收货.拒绝收货
 
         } else if (status.equals("6")) {
-            holder.tvAllDdStatus.setText("商家已扫码确认");
+            holder.tvAllDdStatus.setText("商家扫码成功");
 
             holder.imgAllDdZhifu.setVisibility(View.GONE);//立即支付
             holder.imgAllDdQuxiao.setVisibility(View.GONE);//取消订单
@@ -197,7 +197,7 @@ public class AllDingDanAdapter extends BaseAdapter {
             holder.llAllAdd.setVisibility(View.VISIBLE);//验证真伪.确认收货.拒绝收货
 
         } else if (status.equals("9")) {//评价
-            holder.tvAllDdStatus.setText("已完成");
+            holder.tvAllDdStatus.setText("确认收货");
 
             holder.imgAllDdZhifu.setVisibility(View.GONE);//立即支付
             holder.imgAllDdQuxiao.setVisibility(View.GONE);//取消订单
@@ -225,7 +225,7 @@ public class AllDingDanAdapter extends BaseAdapter {
             holder.imgAllDdQuxiao.setVisibility(View.GONE);//取消订单
             holder.imgAllDdTuikuan.setVisibility(View.GONE);//退款
             holder.imgAllDdPingjia.setVisibility(View.GONE);//评价
-            holder.imgAllDdYiPingJia.setVisibility(View.VISIBLE);//已评价
+            holder.imgAllDdYiPingJia.setVisibility(View.GONE);//已评价
             holder.imgAllDdYanZheng.setVisibility(View.GONE);
             holder.llAllAdd.setVisibility(View.GONE);//验证真伪.确认收货.拒绝收货
 
@@ -246,7 +246,8 @@ public class AllDingDanAdapter extends BaseAdapter {
                 Intent intent = new Intent(mContext, OrderDetailActivity.class);
                 intent.putExtra("type", list.get(position).getStatus());
                 intent.putExtra("psType", list.get(position).getPickup_mode());
-                intent.putExtra("id", list.get(position).getId());
+                intent.putExtra("id", list.get(position).getOrder_no());
+                intent.putExtra("id2", list.get(position).getId());
                 intent.putExtra("position", position);
                 mContext.startActivityForResult(intent, 110);
             }

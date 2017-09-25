@@ -7,6 +7,8 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.jiuyou.R;
@@ -21,6 +23,7 @@ import com.jiuyou.global.AppConfig;
 import com.jiuyou.global.BaseApp;
 import com.jiuyou.model.CommonBean;
 import com.jiuyou.model.OrderBean;
+import com.jiuyou.model.OrderBusBean;
 import com.jiuyou.model.ToPayBean;
 import com.jiuyou.network.interfaces.HomeApi;
 import com.jiuyou.network.response.JZBResponse.PayResponse;
@@ -54,6 +57,9 @@ import retrofit.client.Response;
 public class AllDingDanActivity extends BaseActivity implements AdapterView.OnItemClickListener, PullToRefreshBase.OnRefreshListener2 {
     @Bind(R.id.comment_listview)
     PullToRefreshListView mListView;
+    @Bind(R.id.rl_nogoods)
+    RelativeLayout mRlEmpty;
+
 
     //当前页
     private AllDingDanAdapter adapter;
@@ -90,14 +96,17 @@ public class AllDingDanActivity extends BaseActivity implements AdapterView.OnIt
                 finish();
             }
         });
+
     }
 
     private void initView() {
+        BaseApp.allDingDanActivity = this;
         mList = new ArrayList<>();
         mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         mListView.setHeaderLayout(new RotateLoadingLayout(this, PullToRefreshBase.Mode.PULL_FROM_START, mListView.getPullToRefreshScrollDirection()));
         mListView.setOnRefreshListener(this);
         mListView.setOnItemClickListener(this);
+        mListView.setEmptyView(mRlEmpty);
         adapter = new AllDingDanAdapter(this, mList);
         mListView.setAdapter(adapter);
 
@@ -143,7 +152,8 @@ public class AllDingDanActivity extends BaseActivity implements AdapterView.OnIt
         Intent intent = new Intent(this, OrderDetailActivity.class);
         intent.putExtra("type", orderBean.getStatus());
         intent.putExtra("psType", orderBean.getPickup_mode());
-        intent.putExtra("id", orderBean.getId());
+        intent.putExtra("id", orderBean.getOrder_no());
+        intent.putExtra("id2", orderBean.getId());
         intent.putExtra("position", position - 1);
         startActivityForResult(intent, 110);
     }
@@ -183,6 +193,17 @@ public class AllDingDanActivity extends BaseActivity implements AdapterView.OnIt
             if (position == -1) {
                 return;
             }
+            if (status.equals("4")) {
+                mList.remove(position);
+            } else {
+                mList.get(position).setStatus(status);
+            }
+            adapter.notifyDataSetChanged();
+        }
+
+        if (requestCode == 133) {
+            int position = data.getIntExtra("position", -1);
+            String status = data.getStringExtra("status");
             mList.get(position).setStatus(status);
             adapter.notifyDataSetChanged();
         }
@@ -219,6 +240,7 @@ public class AllDingDanActivity extends BaseActivity implements AdapterView.OnIt
                     @Override
                     protected void onHandleSuccess(CommonBean commonBean) {
                         mList.get(posotion).setStatus("4");
+                        mList.remove(posotion);
                         adapter.notifyDataSetChanged();
                     }
                 });
@@ -256,264 +278,11 @@ public class AllDingDanActivity extends BaseActivity implements AdapterView.OnIt
      * @param position
      */
     public void toPay(final int position) {
-        RetrofitClient.getInstance().createApi().toPay(BaseApp.token(), mList.get(position).getId(), mList.get(position).getPay_type())
-                .compose(RxUtils.<HttpResult<ToPayBean>>io_main())
-                .subscribe(new BaseObjObserver<ToPayBean>(this, "请稍后") {
-                    @Override
-                    protected void onHandleSuccess(ToPayBean toPayBean) {
-                        String pickup_mode = mList.get(position).getPickup_mode();
-                        String psType = "";
-                        if (pickup_mode.equals("自取")) {
-                            psType = "1";
-                        } else {
-                            psType = "2";
-                        }
-                        String pay_type = mList.get(position).getPay_type();
-                        if (pay_type.equals("1")) {
-                            wxPay(position, mList.get(position).getTotal_price(), psType, toPayBean.getOrder_no());
-                        } else if (pay_type.equals("2")) {
-                            aliPay(position, mList.get(position).getTotal_price(), psType, toPayBean.getOrder_no());
-
-                        } else if (pay_type.equals("3")) {
-                            yue(position, mList.get(position).getTotal_price(), psType, toPayBean.getOrder_no());
-                        }
-                    }
-                });
+        Intent intent = new Intent(this, ConfirmOrder2Activity.class);
+        String order_no = mList.get(position).getOrder_no();
+        intent.putExtra("order_no", order_no);
+        intent.putExtra("position", position);
+        startActivityForResult(intent, 133);
     }
 
-
-    private void wxPay(final int position, String currentMoney, final String psType, final String orderId) {
-        WxPay.getWxPay().pay(AllDingDanActivity.this, orderId, "jiaofei", currentMoney, "http://cupboard.jzbwlkj.com/index.php/api/Notify/prodWx", new WxPay.WxCallBack() {
-            @Override
-            public void payResponse(int code) {
-                if (code == 0) {
-                    AppContext.createRequestApi(HomeApi.class).order_info(PrefereUtils.getInstance().getToken(), orderId, new Callback<QuickResponse>() {
-                        @Override
-                        public void success(QuickResponse quickResponse, Response response) {
-                            Log.e("tgh", "token=" + PrefereUtils.getInstance().getToken() + " orderid=" + orderId);
-                            if (quickResponse.getCode() == 200 && quickResponse.getData().getDetail_infos().size() > 0) {
-                                Intent intent = null;
-                                if (psType.equals("1")) {
-                                    intent = new Intent(AllDingDanActivity.this, PaySuccessActivity.class);
-                                } else {
-                                    intent = new Intent(AllDingDanActivity.this, PaySuccess2Activity.class);
-                                }
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable("detail_Info", quickResponse.getData().getDetail_infos());
-                                bundle.putString("pkcode", quickResponse.getData().getPkcode());
-                                bundle.putString("qrcode", quickResponse.getData().getQrcode());
-                                bundle.putString("orderId", orderId);
-                                intent.putExtras(bundle);
-                                mList.get(position).setStatus("1");//状态更改为已支付
-                                adapter.notifyDataSetChanged();
-                                AllDingDanActivity.this.startActivity(intent);
-                            }
-                        }
-
-                        @Override
-                        public void failure(RetrofitError retrofitError) {
-
-                        }
-                    });
-                    ToastUtil.show("缴费成功");
-                } else {
-                    ToastUtil.show("缴费失败");
-                }
-            }
-        });
-    }
-
-    private void aliPay(final int position, String currentMoney, final String psType, final String orderId) {
-
-        AliPay aliPay = new AliPay(this);
-        aliPay.payV2(true, currentMoney, "缴费", orderId, new AliPay.AlipayCallBack() {
-            @Override
-            public void onSuccess() {
-                AppContext.createRequestApi(HomeApi.class).order_info(PrefereUtils.getInstance().getToken(), orderId, new Callback<QuickResponse>() {
-                    @Override
-                    public void success(QuickResponse quickResponse, Response response) {
-                        Log.e("tgh", "token=" + PrefereUtils.getInstance().getToken() + " orderid=" + orderId);
-                        if (quickResponse.getCode() == 200 && quickResponse.getData().getDetail_infos().size() > 0) {
-                            Intent intent = null;
-                            if (psType.equals("1")) {
-                                intent = new Intent(AllDingDanActivity.this, PaySuccessActivity.class);
-                            } else {
-                                intent = new Intent(AllDingDanActivity.this, PaySuccess2Activity.class);
-                            }
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("detail_Info", quickResponse.getData().getDetail_infos());
-                            bundle.putString("pkcode", quickResponse.getData().getPkcode());
-                            bundle.putString("qrcode", quickResponse.getData().getQrcode());
-                            bundle.putString("orderId", orderId);
-                            intent.putExtras(bundle);
-                            mList.get(position).setStatus("1");//状态更改为已支付
-                            adapter.notifyDataSetChanged();
-                            AllDingDanActivity.this.startActivity(intent);
-
-                        }
-                    }
-
-                    @Override
-                    public void failure(RetrofitError retrofitError) {
-
-                    }
-                });
-                ToastUtil.show("缴费成功");
-            }
-
-            @Override
-            public void onDeeling() {
-                ToastUtil.show("支付完成，后台处理中");
-            }
-
-            @Override
-            public void onCancle() {
-                ToastUtil.show("取消缴费");
-            }
-
-            @Override
-            public void onFailure(String msg) {
-                ToastUtil.show(msg);
-            }
-        });
-    }
-
-    private void yue(final int position, final String currentMoney, final String psType, final String orderId) {
-        getLoadingDataBar().show();
-        CartUtils.isFirstPay(PrefereUtils.getInstance().getToken(), new CartUtils.isFirstPayListener() {
-            @Override
-            public void load(boolean status, PayResponse info, String message) {
-                if (status) {
-                    if (info.getPay().getIs_first_pay() == 1) {
-                        //支付密码尚未设置
-                        showPayKeyBoard(true, currentMoney, new OnPasswordInputFinish() {
-                            @Override
-                            public void inputFinish(String password) {
-                                popEnterPassword.dismiss();
-                                UserUtils.setPayInfo(PrefereUtils.getInstance().getToken(), password, new UserUtils.setPayListener() {
-                                    @Override
-                                    public void load(boolean status, UserResponse info, String message) {
-                                        if (status) {
-                                            //密码设置成功
-                                            showPayKeyBoard(false, currentMoney, new OnPasswordInputFinish() {
-                                                @Override
-                                                public void inputFinish(String password) {
-                                                    //进行支付操作
-                                                    getLoadingDataBar().show();
-                                                    String token = PrefereUtils.getInstance().getToken();
-                                                    Log.e("tgh", "token=" + token + "orderId=" + orderId + "pwd=" + MD5Utils.md5(password.getBytes()));
-                                                    CartUtils.quick(token, orderId, password, new CartUtils.quickListener() {
-                                                        @Override
-                                                        public void load(boolean status, QuickResponse info, String message) {
-                                                            if (status) {
-                                                                //零钱支付成功
-                                                                Intent intent = null;
-                                                                if (psType.equals("1")) {
-                                                                    intent = new Intent(AllDingDanActivity.this, PaySuccessActivity.class);
-                                                                } else {
-                                                                    intent = new Intent(AllDingDanActivity.this, PaySuccess2Activity.class);
-                                                                }
-                                                                Bundle bundle = new Bundle();
-                                                                bundle.putSerializable("detail_Info", info.getData().getDetail_infos());
-                                                                bundle.putString("pkcode", info.getData().getPkcode());
-                                                                bundle.putString("qrcode", info.getData().getQrcode());
-                                                                bundle.putString("orderId", orderId);
-                                                                intent.putExtras(bundle);
-                                                                AllDingDanActivity.this.startActivity(intent);
-                                                                mList.get(position).setStatus("1");//状态更改为已支付
-                                                                adapter.notifyDataSetChanged();
-                                                            } else {
-                                                                if (message.contains("余额不足")) {
-                                                                    PopUtil.showDialog(AllDingDanActivity.this, "温馨提醒", "您的余额不足，是否前往充值？", "取消", "去充值", null, new View.OnClickListener() {
-                                                                        @Override
-                                                                        public void onClick(View v) {
-                                                                            //充值界面
-                                                                            startActivity(new Intent(AllDingDanActivity.this, RechargeActivity.class));
-                                                                            finish();
-                                                                        }
-                                                                    });
-                                                                } else {
-                                                                    ToastUtil.show(message);
-                                                                }
-                                                            }
-                                                            closeProgressBar();
-                                                        }
-                                                    });
-
-                                                }
-                                            });
-                                        }
-                                    }
-                                });
-                            }
-                        });
-                    } else if (info.getPay().getIs_first_pay() == 0) {
-                        //支付密码已经设置
-                        showPayKeyBoard(false, currentMoney, new OnPasswordInputFinish() {
-                            @Override
-                            public void inputFinish(String password) {
-                                //进行支付操作
-                                popEnterPassword.dismiss();
-                                getLoadingDataBar().show();
-                                Log.e("tgh", "token=" + PrefereUtils.getInstance().getToken() + "orderId=" + orderId + "pwd=" + MD5Utils.md5(password.getBytes()));
-                                CartUtils.quick(PrefereUtils.getInstance().getToken(), orderId, password, new CartUtils.quickListener() {
-                                    @Override
-                                    public void load(boolean status, QuickResponse info, String message) {
-                                        if (status) {
-                                            //零钱支付成功
-                                            Intent intent = null;
-                                            if (psType.equals("1")) {
-                                                intent = new Intent(AllDingDanActivity.this, PaySuccessActivity.class);
-                                            } else {
-                                                intent = new Intent(AllDingDanActivity.this, PaySuccess2Activity.class);
-                                            }
-                                            Bundle bundle = new Bundle();
-                                            bundle.putSerializable("detail_Info", info.getData().getDetail_infos());
-                                            bundle.putString("pkcode", info.getData().getPkcode());
-                                            bundle.putString("qrcode", info.getData().getQrcode());
-                                            bundle.putString("orderId", orderId);
-                                            intent.putExtras(bundle);
-                                            mList.get(position).setStatus("1");//状态更改为已支付
-                                            adapter.notifyDataSetChanged();
-                                            AllDingDanActivity.this.startActivity(intent);
-                                        } else {
-
-                                            if (message.contains("余额不足")) {
-                                                PopUtil.showDialog(AllDingDanActivity.this, "温馨提醒", "您的余额不足，是否前往充值？", "取消", "去充值", null, new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View v) {
-                                                        //充值界面
-                                                        startActivity(new Intent(AllDingDanActivity.this, RechargeActivity.class));
-                                                        finish();
-                                                    }
-                                                });
-                                            } else {
-                                                ToastUtil.show(message);
-                                            }
-                                        }
-                                        closeProgressBar();
-                                    }
-                                });
-
-
-                            }
-                        });
-                    }
-                } else {
-                    ToastUtil.show(message);
-                }
-                closeProgressBar();
-            }
-        });
-    }
-
-    PopEnterPassword popEnterPassword;
-
-    public void showPayKeyBoard(boolean isFirstPay, String amount, OnPasswordInputFinish listener) {
-        popEnterPassword = new PopEnterPassword(this, isFirstPay, amount, "", listener);
-        // 显示窗口
-        popEnterPassword.showAtLocation(this.findViewById(R.id.layoutContent),
-                Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); // 设置layout在PopupWindow中显示的位置
-
-    }
 }

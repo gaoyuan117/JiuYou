@@ -23,7 +23,7 @@
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginRight="15dp"
-                android:src="@mipmap/icon_personal_center_user_head"
+                android:src="@mipmap/logo"
                 />
         </LinearLayout>
 

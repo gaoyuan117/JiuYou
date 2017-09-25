@@ -65,7 +65,7 @@ public class OrderInfoItemAdapter extends BaseAdapter {
         holder.tvAllDdPrice.setText("¥ " + bean.getPrice());
         holder.tvAllDdNum.setText("x " + bean.getQuantity());
 
-        Glide.with(mContext).load(AppConfig.ENDPOINTPIC + bean.getImg()).diskCacheStrategy(DiskCacheStrategy.ALL).error(R.mipmap.icon_nopic).into(holder.imgAllDd);
+        Glide.with(mContext).load(AppConfig.ENDPOINTPIC + bean.getGoods_img()).diskCacheStrategy(DiskCacheStrategy.ALL).error(R.mipmap.logo).into(holder.imgAllDd);
         return convertView;
     }
 

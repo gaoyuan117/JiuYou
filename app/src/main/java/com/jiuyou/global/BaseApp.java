@@ -49,6 +49,7 @@ import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.jiuyou.core.AppContext;
 import com.jiuyou.ui.Utils.SharedPreference;
+import com.jiuyou.ui.activity.AllDingDanActivity;
 import com.jiuyou.util.SharedPrefrencesUtil;
 
 import org.json.JSONObject;
@@ -66,6 +67,8 @@ public class BaseApp extends MultiDexApplication {
     static URL url = null;
     static String resultData;
     static HttpURLConnection urlConn = null;
+    public static AllDingDanActivity allDingDanActivity;
+    public static int positon;
 
     private static BaseApp _app = null;
     private static Context mContext;

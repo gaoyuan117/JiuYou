@@ -65,7 +65,7 @@ public class AddAdressActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_adress);
         ButterKnife.bind(this);
-        setCenterTitle("编辑收获地址");
+        setCenterTitle("新增收货地址");
         initEvent();
 
         bean = (MyAdressBean) getIntent().getSerializableExtra("data");
@@ -135,8 +135,12 @@ public class AddAdressActivity extends BaseActivity {
                     showToastMsg("请输入详细地址");
                     return;
                 }
-
-                getGeoPointBystr(detail, city);
+                if (bean == null) {
+                    addReceiveAddr();
+                } else {
+                    editAdress();
+                }
+//                getGeoPointBystr(detail, city);
             }
         });
     }
@@ -204,49 +208,6 @@ public class AddAdressActivity extends BaseActivity {
         }
     }
 
-    /**
-     * 获取经纬度
-     *
-     * @param city
-     * @param detail
-     */
-    public void getGeoPointBystr(String city, String detail) {
-        mSearch = GeoCoder.newInstance();
-        OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
-
-            public void onGetGeoCodeResult(GeoCodeResult result) {
-                if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-                    //没有检索到结果
-                    showToastMsg("没有找到改地址，请重新输入详细地址");
-                    return;
-                }
-                //获取地理编码结果
-                latitude = result.getLocation().latitude;
-                longitude = result.getLocation().longitude;
-                Log.e("gy", "获取地理编码结果 经度：" + result.getLocation().latitude);
-                Log.e("gy", "获取地理编码结果 纬度：" + result.getLocation().longitude);
-
-                if (bean == null) {
-                    addReceiveAddr();
-                } else {
-                    editAdress();
-                }
-            }
-
-            @Override
-            public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
-                if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-                    //没有找到检索结果
-                }
-                //获取反向地理编码结果
-            }
-        };
-        mSearch.setOnGetGeoCodeResultListener(listener);
-        mSearch.geocode(new GeoCodeOption()
-                .city(city)
-                .address(detail));
-
-    }
 
     /**
      * 添加收获地址

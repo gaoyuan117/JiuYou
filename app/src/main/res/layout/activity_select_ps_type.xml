@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#f3f4f5"
     android:orientation="vertical"
+    android:id="@+id/layoutContent"
     tools:context="com.jiuyou.ui.activity.SelectPsTypeActivity">
 
     <include layout="@layout/layout_title" />

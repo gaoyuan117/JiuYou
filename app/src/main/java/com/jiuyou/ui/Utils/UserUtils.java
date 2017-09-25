@@ -107,7 +107,7 @@ public class UserUtils {
      */
     public static void reChargeOrder(String token,double amount,String pay_channel,final reChargeListener listener) {
         HomeApi api = getHomeApi();
-        api.rechargeOrder(token,amount,pay_channel, new Callback<AmountResponse>() {
+        api.rechargeOrder("android",token,amount,pay_channel, new Callback<AmountResponse>() {
             @Override
             public void success(AmountResponse userResponse, Response response) {
                 if (userResponse.getCode()==200) {

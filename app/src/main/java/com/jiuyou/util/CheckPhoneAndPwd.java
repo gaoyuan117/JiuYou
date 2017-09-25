@@ -7,7 +7,7 @@ import com.jiuyou.util.Status.LoginStatus;
 public class CheckPhoneAndPwd {
 
     //	String phoneRegex = "^[1][358][0-9]{9}$";
-    String phoneRegex = "^1[35789]\\d{9}$";
+    String phoneRegex = "^1[345789]\\d{9}$";
     String pwdRegex = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$";
     String postCodeRegex = "[0-9]\\d{5}(?!\\d)";
     /**

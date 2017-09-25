@@ -67,7 +67,7 @@ public class AdressAdapter extends BaseAdapter {
         }
 
         viewHolder.tvAdressInfo.setText(adress);
-        viewHolder.tvAdressP.setText(bean.getProvince() + "省");
+        viewHolder.tvAdressP.setText(bean.getRealname());
         viewHolder.tvAdressPhone.setText(bean.getMobile());
 
         viewHolder.cbAdress.setOnClickListener(new View.OnClickListener() {

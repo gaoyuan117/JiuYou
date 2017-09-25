@@ -87,7 +87,7 @@
             android:autoText="false"
             android:background="@null"
             android:inputType="number"
-            android:hint="@string/hint_yanzheng"
+            android:hint="请输入验证码"
             android:maxLength="20"
             />
         <TextView

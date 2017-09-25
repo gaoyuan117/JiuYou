@@ -45,7 +45,7 @@
                 android:layout_toLeftOf="@+id/del_phone"
                 android:layout_toRightOf="@+id/img_user"
                 android:background="@null"
-                android:hint="手机号"
+                android:hint="请输入手机号"
                 android:inputType="number"
                 android:maxLength="11"
                 android:singleLine="true" />
@@ -99,7 +99,7 @@
                 android:layout_toRightOf="@+id/img_yanzheng"
                 android:autoText="false"
                 android:background="@null"
-                android:hint="@string/hint_yanzheng"
+                android:hint="请输入验证码"
                 android:inputType="number"
                 android:maxLength="20" />
 
@@ -159,7 +159,7 @@
                 android:layout_toRightOf="@+id/img_pwd"
                 android:autoText="false"
                 android:background="@null"
-                android:hint="密码"
+                android:hint="请输入密码"
                 android:inputType="textPassword"
                 android:maxLength="20" />
 

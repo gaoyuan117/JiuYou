@@ -17,4 +17,31 @@
         android:listSelector="@color/translate"
         android:scrollbars="none" />
 
+    <RelativeLayout
+        android:gravity="center"
+        android:id="@+id/rl_nogoods"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/iv_biaoqing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/no_orders"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_biaoqing"
+            android:layout_marginTop="16dp"
+            android:text="      暂无订单！"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
 </LinearLayout>

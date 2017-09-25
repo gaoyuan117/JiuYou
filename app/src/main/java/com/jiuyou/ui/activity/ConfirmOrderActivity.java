@@ -89,7 +89,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
     private String totalNum, totalPrice;
     private String orderId;
     private String[] selPros;
-    private String channelPay = "weixin";
+    private String channelPay = "zhifubao";
     private ImageButton ib_lingqian, ib_weixin, ib_zhifubao, ib_yinlian;
     private TextView tv1;
     private Intent intent2;
@@ -97,7 +97,9 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
 
     private String dialogMessage;//距离太远 提示语句
     private List<String> timeList;//配送时间集合
-    private String psType;//取货方式 1 自取  2 配送
+    private String psType, send_type;//取货方式 1 自取  2 配送
+    private String ps_time;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +154,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
 
     private void initData() {
         list = (ArrayList<Cart>) getIntent().getSerializableExtra("selectCarts");
+        timeList = new ArrayList<>();
         selPros = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             selPros[i] = list.get(i).getId();
@@ -162,8 +165,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         mylistview.setAdapter(adapter);
         tv_pronum.setText("共" + totalNum.replace("(", "") + "件商品");
         tv_proprice.setText(totalPrice);
-        DecimalFormat df = new DecimalFormat("######0.00");
-        tv_zongji.setText("总计:¥" + df.format((Double.parseDouble(totalPrice.substring(1))) * Integer.parseInt(AppConfig.DisCount) / 100));
+        tv_zongji.setText("总计:" + totalPrice);
         tv1.setText("余额支付");
     }
 
@@ -183,12 +185,14 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                 changeIB(R.id.rl_lingqian);
                 break;
             case R.id.rl_weixin:
-                channelPay = "weixin";
-                changeIB(R.id.rl_weixin);
+                ToastUtil.show("微信支付功能尚未完善，请先选择其他支付方式支付");
+//                channelPay = "weixin";
+//                changeIB(R.id.rl_weixin);
                 break;
             case R.id.ib_weixin:
-                channelPay = "weixin";
-                changeIB(R.id.rl_weixin);
+                ToastUtil.show("微信支付功能尚未完善，请先选择其他支付方式支付");
+//                channelPay = "weixin";
+//                changeIB(R.id.rl_weixin);
                 break;
             case R.id.rl_zhifubao:
                 channelPay = "zhifubao";
@@ -208,7 +212,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.tv_tijiao://提交订单
 
-                if(adressBean==null){
+                if (adressBean == null) {
                     Toast.makeText(this, "请添加收货地址", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -217,18 +221,17 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                     return;
                 }
 
-                if (psType.equals("1")) {//自取
-                    toPay("");
-                    return;
-                }
-                if (timeList == null || timeList.size() == 0) {
-                    showTimeDialog();
-                } else {
-                    showTimePopWindow();
-                }
+                toPay(ps_time);
+
                 break;
             case R.id.ll_confirm_order_type://配送方式
-                startActivityForResult(new Intent(ConfirmOrderActivity.this, SelectPsTypeActivity.class), 111);
+                if (adressBean == null) {
+                    ToastUtil.show("请选择收货地址");
+                    return;
+                }
+                Intent in = new Intent(ConfirmOrderActivity.this, SelectPsTypeActivity.class);
+                in.putExtra("id", adressBean.getId() + "");
+                startActivityForResult(in, 111);
                 break;
 
             case R.id.tv_confirm_order_add://添加收货地址
@@ -240,42 +243,6 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
-
-    /**
-     * 显示配送时间PopoupWindow
-     */
-    private void showTimePopWindow() {
-        View view = View.inflate(this, R.layout.pop_confirm_order, null);
-        ListView listView = (ListView) view.findViewById(R.id.lv_pop_time);
-        OrderTimeAdapter adapter = new OrderTimeAdapter(this, timeList);
-        listView.setAdapter(adapter);
-        PopupWindow window = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        window.setTouchable(true);
-        window.setOutsideTouchable(true);
-        window.setFocusable(true);
-
-        window.showAtLocation(this.findViewById(R.id.layoutContent), Gravity.BOTTOM, 0, 0);
-        setBackgroundAlpha(this, 0.5f);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ImageView imageView = (ImageView) view.findViewById(R.id.img_selector);
-                imageView.setVisibility(View.VISIBLE);
-                toPay(timeList.get(i));
-            }
-        });
-
-        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                if (this != null) {
-                    setBackgroundAlpha(ConfirmOrderActivity.this, 1f);
-                }
-            }
-        });
-
-    }
 
     /**
      * 去支付  生成订单号
@@ -297,7 +264,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
 
             Log.e("gy", "配送方式：" + psType);
             Log.e("gy", "支付方式：" + payType);
-            CartUtils.toTrade(adressBean.getId(), psType, sendTime, payType, token, selPros, new CartUtils.toTradeListener() {
+            CartUtils.toTrade(adressBean.getId(), psType, sendTime, payType, token, selPros, send_type, new CartUtils.toTradeListener() {
                 @Override
                 public void load(boolean status, PayResponse info, String message) {
                     if (status) {
@@ -310,36 +277,6 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                 }
             });
         }
-    }
-
-    /**
-     * 显示距离太远 配送时间没有
-     */
-    private void showTimeDialog() {
-        PopUtil.showDialog(ConfirmOrderActivity.this, "温馨提醒", dialogMessage, "取消", "确认支付", null, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toPay(dialogMessage);
-                PopUtil.dismissPop();
-            }
-        });
-    }
-
-    /**
-     * 设置页面的透明度
-     *
-     * @param bgAlpha 1表示不透明
-     */
-    public static void setBackgroundAlpha(Activity activity, float bgAlpha) {
-        WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
-        lp.alpha = bgAlpha;
-        if (bgAlpha == 1) {
-            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
-        } else {
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
-        }
-        activity.getWindow().setAttributes(lp);
-
     }
 
     //支付
@@ -392,9 +329,9 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
 
                         }
                     });
-                    ToastUtil.show("缴费成功");
+//                    ToastUtil.show("缴费成功");
                 } else {
-                    ToastUtil.show("缴费失败");
+                    ToastUtil.show("购买失败");
                 }
             }
         });
@@ -404,13 +341,13 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
 
         AliPay aliPay = new AliPay(ConfirmOrderActivity.this);
         String currentMoney = totalPrice.substring(1);
-        aliPay.payV2(true, currentMoney, "缴费", orderId, new AliPay.AlipayCallBack() {
+        aliPay.payV2(true, currentMoney, "购买", orderId, new AliPay.AlipayCallBack() {
             @Override
             public void onSuccess() {
                 AppContext.createRequestApi(HomeApi.class).order_info(PrefereUtils.getInstance().getToken(), orderId, new Callback<QuickResponse>() {
                     @Override
                     public void success(QuickResponse quickResponse, Response response) {
-                        Log.e("tgh", "token=" + PrefereUtils.getInstance().getToken() + " orderid=" + orderId);
+                        Log.e("tgh", "token=" + PrefereUtils.getInstance().getToken() + " orderid=" + orderId + "    " + quickResponse.getCode());
                         if (quickResponse.getCode() == 200 && quickResponse.getData().getDetail_infos().size() > 0) {
                             Intent intent = null;
                             if (psType.equals("1")) {
@@ -438,7 +375,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
 
                     }
                 });
-                ToastUtil.show("缴费成功");
+                ToastUtil.show("购买成功");
             }
 
             @Override
@@ -448,7 +385,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
 
             @Override
             public void onCancle() {
-                ToastUtil.show("取消缴费");
+                ToastUtil.show("取消购买");
             }
 
             @Override
@@ -486,7 +423,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                                                     //进行支付操作
                                                     getLoadingDataBar().show();
                                                     String token = PrefereUtils.getInstance().getToken();
-                                                    Log.e("tgh", "token=" + token + "orderId=" + orderId + "pwd=" + MD5Utils.md5(password.getBytes()));
+                                                    Log.e("tgh", "token=" + token + "orderId=" + orderId + "pwd=" + MD5Utils.toMD5(password));
                                                     CartUtils.quick(token, orderId, password, new CartUtils.quickListener() {
                                                         @Override
                                                         public void load(boolean status, QuickResponse info, String message) {
@@ -540,7 +477,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                                 popEnterPassword.dismiss();
                                 getLoadingDataBar().show();
 //                                String md5pwd=MD5Utils.md5(password.getBytes());
-                                Log.e("tgh", "token=" + PrefereUtils.getInstance().getToken() + "orderId=" + orderId + "pwd=" + MD5Utils.md5(password.getBytes()));
+                                Log.e("tgh", "token=" + PrefereUtils.getInstance().getToken() + "orderId=" + orderId + "pwd=" + MD5Utils.toMD5(password));
                                 CartUtils.quick(PrefereUtils.getInstance().getToken(), orderId, password, new CartUtils.quickListener() {
                                     @Override
                                     public void load(boolean status, QuickResponse info, String message) {
@@ -669,28 +606,8 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
 
         String id = bean.getId();//收货地址ID
         Log.e("gy", "收货地址🆔：" + id);
-
-        getDistance(id);
-
     }
 
-    /**
-     * 获取时间距离列表
-     */
-    private void getDistance(String id) {
-        RetrofitClient.getInstance().createApi().getDistance(id)
-                .compose(RxUtils.<OrderTimeBean>io_main())
-                .subscribe(new Consumer<OrderTimeBean>() {
-                    @Override
-                    public void accept(OrderTimeBean orderTimeBean) throws Exception {
-                        if (orderTimeBean.getCode() == 200) {
-                            timeList = orderTimeBean.getData().getTime();
-                        } else if (orderTimeBean.getCode() == 201) {
-                            dialogMessage = orderTimeBean.getMessage();
-                        }
-                    }
-                });
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -704,6 +621,8 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
 
         if (resultCode == 110) {//配送方式
             psType = data.getStringExtra("type");
+            ps_time = data.getStringExtra("ps_time");
+            send_type = data.getStringExtra("send_type");
             if (psType.equals("1")) {
                 tvConfirmOrderType.setText("自取");
             } else if (psType.equals("2")) {

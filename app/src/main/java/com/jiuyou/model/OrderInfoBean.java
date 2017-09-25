@@ -7,53 +7,80 @@ import java.util.List;
  * Created by gaoyuan on 2017/8/14.
  */
 
-public class OrderInfoBean implements Serializable{
+public class OrderInfoBean implements Serializable {
+
 
     /**
-     * pkcode : 000399
-     * qrcode : qrcode/2017081267056.png
-     * pickup_mode : 自取
-     * create_time : 2017-08-12 16:10:30
-     * send_time :
-     * detail_Info : [{"id":"1041","order_id":"850","order_no":"2017081267056","product_id":"57","quantity":"1","price":"0.01","product_name":"53°茅台迎宾酒500ml","pick":"0","is_comment":"0","comment":null,"comm_time":null},{"id":"1042","order_id":"850","order_no":"2017081267056","product_id":"56","quantity":"1","price":"0.01","product_name":"猪耳朵","pick":"0","is_comment":"0","comment":null,"comm_time":null}]
-     * receive : {"address":"山东济宁市兖州市富阳路百丰国际商务中心1层","mobile":"13639447983","realname":"刘","lng":"116.813224","lat":"35.533252"}
-     * ps_lng : null
-     * ps_lat : null
+     * id : 978
+     * uid : 51
+     * order_no : 2017090237150
+     * status : 7
+     * pkcode : null
+     * qrcode : qrcode/2017090237150.png
+     * pickup_mode : 配送
+     * create_time : 2017-09-02 21:41:16
+     * send_time : 23:17
+     * detail_Info : [{"id":"1185","order_id":"978","order_no":"2017090237150","product_id":"64","quantity":"1","price":"425.00","product_name":"55度内盒西凤酒","pick":"0","is_comment":"0","comment":null,"comm_time":null,"goods_img":"Product/masterImg/2017-08-24/599eb0f8556c1.jpg"}]
+     * total_price : 425
+     * pay_channel : 余额
+     * receive : {"address":"山东济南市历下区济南商贸学校","mobile":"17615866248","realname":"哈哈","lng":"117.15596810774","lat":"36.698253363471"}
+     * ps_lng : 117.170205
+     * ps_lat : 36.66639
      */
 
-    private String pkcode;
-    private String total_price;
+    private String id;
+    private String uid;
+    private String order_no;
+    private String status;
+    private Object pkcode;
     private String qrcode;
     private String pickup_mode;
     private String create_time;
     private String send_time;
-    private String pay_type;
+    private String total_price;
+    private String pay_channel;
     private ReceiveBean receive;
-    private Object ps_lng;
-    private Object ps_lat;
+    private String ps_lng;
+    private String ps_lat;
     private List<DetailInfoBean> detail_Info;
 
-    public String getPay_type() {
-        return pay_type;
+    public String getId() {
+        return id;
     }
 
-    public void setPay_type(String pay_type) {
-        this.pay_type = pay_type;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getTotal_price() {
-        return total_price;
+    public String getUid() {
+        return uid;
     }
 
-    public void setTotal_price(String total_price) {
-        this.total_price = total_price;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
-    public String getPkcode() {
+    public String getOrder_no() {
+        return order_no;
+    }
+
+    public void setOrder_no(String order_no) {
+        this.order_no = order_no;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Object getPkcode() {
         return pkcode;
     }
 
-    public void setPkcode(String pkcode) {
+    public void setPkcode(Object pkcode) {
         this.pkcode = pkcode;
     }
 
@@ -89,6 +116,22 @@ public class OrderInfoBean implements Serializable{
         this.send_time = send_time;
     }
 
+    public String getTotal_price() {
+        return total_price;
+    }
+
+    public void setTotal_price(String total_price) {
+        this.total_price = total_price;
+    }
+
+    public String getPay_channel() {
+        return pay_channel;
+    }
+
+    public void setPay_channel(String pay_channel) {
+        this.pay_channel = pay_channel;
+    }
+
     public ReceiveBean getReceive() {
         return receive;
     }
@@ -97,19 +140,19 @@ public class OrderInfoBean implements Serializable{
         this.receive = receive;
     }
 
-    public Object getPs_lng() {
+    public String getPs_lng() {
         return ps_lng;
     }
 
-    public void setPs_lng(Object ps_lng) {
+    public void setPs_lng(String ps_lng) {
         this.ps_lng = ps_lng;
     }
 
-    public Object getPs_lat() {
+    public String getPs_lat() {
         return ps_lat;
     }
 
-    public void setPs_lat(Object ps_lat) {
+    public void setPs_lat(String ps_lat) {
         this.ps_lat = ps_lat;
     }
 
@@ -121,13 +164,13 @@ public class OrderInfoBean implements Serializable{
         this.detail_Info = detail_Info;
     }
 
-    public static class ReceiveBean implements Serializable{
+    public static class ReceiveBean  implements Serializable{
         /**
-         * address : 山东济宁市兖州市富阳路百丰国际商务中心1层
-         * mobile : 13639447983
-         * realname : 刘
-         * lng : 116.813224
-         * lat : 35.533252
+         * address : 山东济南市历下区济南商贸学校
+         * mobile : 17615866248
+         * realname : 哈哈
+         * lng : 117.15596810774
+         * lat : 36.698253363471
          */
 
         private String address;
@@ -177,19 +220,20 @@ public class OrderInfoBean implements Serializable{
         }
     }
 
-    public static class DetailInfoBean implements Serializable{
+    public static class DetailInfoBean implements Serializable {
         /**
-         * id : 1041
-         * order_id : 850
-         * order_no : 2017081267056
-         * product_id : 57
+         * id : 1185
+         * order_id : 978
+         * order_no : 2017090237150
+         * product_id : 64
          * quantity : 1
-         * price : 0.01
-         * product_name : 53°茅台迎宾酒500ml
+         * price : 425.00
+         * product_name : 55度内盒西凤酒
          * pick : 0
          * is_comment : 0
          * comment : null
          * comm_time : null
+         * goods_img : Product/masterImg/2017-08-24/599eb0f8556c1.jpg
          */
 
         private String id;
@@ -200,18 +244,10 @@ public class OrderInfoBean implements Serializable{
         private String price;
         private String product_name;
         private String pick;
-        private String goods_img;
         private String is_comment;
         private Object comment;
         private Object comm_time;
-
-        public String getImg() {
-            return goods_img;
-        }
-
-        public void setImg(String img) {
-            this.goods_img = img;
-        }
+        private String goods_img;
 
         public String getId() {
             return id;
@@ -299,6 +335,14 @@ public class OrderInfoBean implements Serializable{
 
         public void setComm_time(Object comm_time) {
             this.comm_time = comm_time;
+        }
+
+        public String getGoods_img() {
+            return goods_img;
+        }
+
+        public void setGoods_img(String goods_img) {
+            this.goods_img = goods_img;
         }
     }
 }

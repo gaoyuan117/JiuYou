@@ -64,34 +64,34 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class AccountManagerActivity extends BaseActivity {
-        @Bind(R.id.title_bar_operate_1)
-        ImageView title_bar_operate_1;
-        @Bind(R.id.rl_head)
-        RelativeLayout rl_head;
-        @Bind(R.id.img_head)
-        CircleImageView img_head;
-        @Bind(R.id.rl_nick_name)
-        RelativeLayout rl_nick_name;
-        @Bind(R.id.txt_nick_name)
-        TextView txt_nick_name;
-        @Bind(R.id.rl_chundong)
-        RelativeLayout rl_chundong;
-        @Bind(R.id.txt_chundong)
-        TextView txt_chundong;
-        @Bind(R.id.rl_changeword)
-        RelativeLayout rl_changeword;
+    @Bind(R.id.title_bar_operate_1)
+    ImageView title_bar_operate_1;
+    @Bind(R.id.rl_head)
+    RelativeLayout rl_head;
+    @Bind(R.id.img_head)
+    CircleImageView img_head;
+    @Bind(R.id.rl_nick_name)
+    RelativeLayout rl_nick_name;
+    @Bind(R.id.txt_nick_name)
+    TextView txt_nick_name;
+    @Bind(R.id.rl_chundong)
+    RelativeLayout rl_chundong;
+    @Bind(R.id.txt_chundong)
+    TextView txt_chundong;
+    @Bind(R.id.rl_changeword)
+    RelativeLayout rl_changeword;
 
-        public static String ImageName;
-        String urlsf = "";
-        Uri uri = null, cutUri = null;
-        public static final int NONE = 40;
-        public static final int PHOTOHRAPH = 41;// 拍照
-        public static final int PHOTOZOOM = 42; // 缩放
-        public static final int PHOTORESOULT = 43;// 结果
-        public static final String IMAGE_UNSPECIFIED = "image/*";
-        UserInfo user;
-        ACache aCache;
-        int img = 1;
+    public static String ImageName;
+    String urlsf = "";
+    Uri uri = null, cutUri = null;
+    public static final int NONE = 40;
+    public static final int PHOTOHRAPH = 41;// 拍照
+    public static final int PHOTOZOOM = 42; // 缩放
+    public static final int PHOTORESOULT = 43;// 结果
+    public static final String IMAGE_UNSPECIFIED = "image/*";
+    UserInfo user;
+    ACache aCache;
+    int img = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,44 +109,47 @@ public class AccountManagerActivity extends BaseActivity {
         super.onPostResume();
     }
 
-    private void initview(){
+    private void initview() {
         title_bar_operate_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppConfig.currentTAB=MainActivity.TAB_MINE;
+                AppConfig.currentTAB = MainActivity.TAB_MINE;
                 AccountManagerActivity.this.finish();
             }
         });
     }
+
     public void fixHeader(View view) {
         PopUtil.showPhtotUpload(this, "Header");
     }
+
     public void cancelLoginOut(View v) {
         PopUtil.dismissPop();
     }
-    public void fixNickName(View view){
-        Intent intent=new Intent(AccountManagerActivity.this,ChangeNikeNameActivity.class);
-        intent.putExtra("nikename",txt_nick_name.getText().toString().trim());
-        startActivityForResult(intent,100);
+
+    public void fixNickName(View view) {
+        Intent intent = new Intent(AccountManagerActivity.this, ChangeNikeNameActivity.class);
+        intent.putExtra("nikename", txt_nick_name.getText().toString().trim());
+        startActivityForResult(intent, 100);
     }
 
-    public void fixChunDong(View view){
+    public void fixChunDong(View view) {
         //修改春東號
         AppContext.createRequestApi(HomeApi.class).isset_cd_acc(PrefereUtils.getInstance().getToken(), new Callback<NearByResponse>() {
             @Override
             public void success(NearByResponse nearByResponse, Response response) {
-                  if(nearByResponse.getCode()==200){
-                      Intent chundong=new Intent(AccountManagerActivity.this,ChangeChunDongActivity.class);
-                      String cd=txt_chundong.getText().toString().trim();
-                      if(cd.contains("未设置")){
-                          cd="";
-                      }
-                      chundong.putExtra("chundong",cd);
+                if (nearByResponse.getCode() == 200) {
+                    Intent chundong = new Intent(AccountManagerActivity.this, ChangeChunDongActivity.class);
+                    String cd = txt_chundong.getText().toString().trim();
+                    if (cd.contains("未设置")) {
+                        cd = "";
+                    }
+                    chundong.putExtra("chundong", cd);
 //            startActivity(chundong);
-                      startActivityForResult(chundong,100);
-                  }else{
-                      ToastUtil.show(nearByResponse.getMessage());
-                  }
+                    startActivityForResult(chundong, 100);
+                } else {
+                    ToastUtil.show(nearByResponse.getMessage());
+                }
             }
 
             @Override
@@ -157,17 +160,19 @@ public class AccountManagerActivity extends BaseActivity {
 
     }
 
-    public  void fixPwd(View view){
+    public void fixPwd(View view) {
 
         toNext(ChangePWDANDPAYActivity.class);
 
 
     }
+
     public void getAvatarByCamera(View view) {
         PopUtil.dismissPop();
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(camera, 1);
     }
+
     public void getAvatarFromAlbum(View view) {
         PopUtil.dismissPop();
         Intent picture = new Intent(
@@ -179,8 +184,8 @@ public class AccountManagerActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==1000){
-              init();
+        if (resultCode == 1000) {
+            init();
         }
         if (requestCode == 1 && resultCode == Activity.RESULT_OK
                 && null != data) {
@@ -226,7 +231,7 @@ public class AccountManagerActivity extends BaseActivity {
                 c.moveToFirst();
                 int columnIndex = c.getColumnIndex(filePathColumns[0]);
                 String picturePath = c.getString(columnIndex);
-                Log.e(AppConfig.TAG,"picturePath="+picturePath);
+                Log.e(AppConfig.TAG, "picturePath=" + picturePath);
                 c.close();
 
                 Bitmap bmp = BitmapFactory.decodeFile(picturePath);
@@ -239,6 +244,7 @@ public class AccountManagerActivity extends BaseActivity {
             }
         }
     }
+
     public void saveBitmapFile(Bitmap bitmap, String path) {
         File file = new File(path);//将要保存图片的路径
         try {
@@ -250,6 +256,7 @@ public class AccountManagerActivity extends BaseActivity {
             e.printStackTrace();
         }
     }
+
     private void setUI() {
         if (TextUtils.isEmpty(user.getMobile())) {
             txt_nick_name.setTextColor(getResources().getColor(R.color.xn_red));
@@ -258,18 +265,20 @@ public class AccountManagerActivity extends BaseActivity {
             txt_nick_name.setTextColor(getResources().getColor(R.color.account_manager_txt_color));
             txt_nick_name.setText(user.getMobile());
         }
-        if(user.getCd_acc()!=null&&!user.getCd_acc().equals("")){
+        if (user.getCd_acc() != null && !user.getCd_acc().equals("")) {
             txt_chundong.setText(user.getCd_acc());
-        }else{
+        } else {
             txt_chundong.setText("未设置");
         }
 
 //        tags.setText(user.getUserInfo().getTags());
         setHead(user.getAvatar());
     }
+
     private void setHead(String headImg) {
         ImageSize imageSize = new com.sheyuan.universalimageloader.core.assist.ImageSize(80, 80);
     }
+
     private void modifyHead(final String headPath) {
 
         PopUtil.dismissPop();
@@ -277,6 +286,7 @@ public class AccountManagerActivity extends BaseActivity {
         mSelectPath.add(headPath);
 
     }
+
     private void sendHeadImages(List<String> fileNames) {
         if (fileNames == null || fileNames.size() == 0) {
             ToastUtil.show("上传失败");
@@ -291,6 +301,7 @@ public class AccountManagerActivity extends BaseActivity {
             }
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -301,13 +312,13 @@ public class AccountManagerActivity extends BaseActivity {
         UserUtils.getUserInfo(PrefereUtils.getInstance().getToken(), new UserUtils.getUserInfoListener() {
             @Override
             public void load(boolean status, UserResponse info, String message) {
-                if(status){
+                if (status) {
                     //保存用户信息
                     upDateUserStatus(info.getUserInfo());
                     //显示用户信息详情
                     showUserInfo(info.getUserInfo());
 
-                }else{
+                } else {
                     ToastUtil.show(message);
                 }
                 closeProgressBar();
@@ -315,22 +326,24 @@ public class AccountManagerActivity extends BaseActivity {
         });
 
     }
-    private void showUserInfo(UserInfo info){
-        AppContext.getImageLoaderProxy().displayImage(AppConfig.ENDPOINTPIC+info.getAvatar(),img_head);
+
+    private void showUserInfo(UserInfo info) {
+        AppContext.getImageLoaderProxy().displayImage(AppConfig.ENDPOINTPIC + info.getAvatar(), img_head);
         txt_nick_name.setText(info.getNickname());
-        if(info.getCd_acc()!=null&&!info.getCd_acc().equals("")){
+        if (info.getCd_acc() != null && !info.getCd_acc().equals("")) {
             txt_chundong.setText(info.getCd_acc());
-        }else{
+        } else {
             txt_chundong.setText("未设置");
         }
     }
+
     public void staffFileupload(File file) {
         if (false) {
             showToastShort("网络未连接");
             return;
         }
         HttpUtils http = new HttpUtils();
-        http.send(HttpRequest.HttpMethod.POST, "http://cupboard.jzbwlkj.com/index.php/api/user/Updateavatar", MYUPDATEIMG(file),
+        http.send(HttpRequest.HttpMethod.POST, AppConfig.ENDPOINT + "/index.php/api/user/Updateavatar", MYUPDATEIMG(file),
                 new RequestCallBack<String>() {
 
                     @Override
@@ -341,6 +354,7 @@ public class AccountManagerActivity extends BaseActivity {
                     public void onSuccess(ResponseInfo<String> arg0) {
                         JSONObject jsonobj;
                         try {
+                            Log.e("gy","asdasd:"+ arg0.result.toString());
                             jsonobj = new JSONObject(arg0.result.toString());
                             String errno = jsonobj.getString("errno");
                             String error = jsonobj.getString("error");
@@ -356,12 +370,13 @@ public class AccountManagerActivity extends BaseActivity {
                                 showToastShort("头像修改失败");
                             }
                         } catch (JSONException e) {
-                            return;
+                            e.printStackTrace();
                         }
                     }
 
                 });
     }
+
     /***
      * 修改头像
      *
@@ -369,7 +384,7 @@ public class AccountManagerActivity extends BaseActivity {
      */
     public static final RequestParams MYUPDATEIMG(File file) {
         RequestParams params = new RequestParams();
-        String token=PrefereUtils.getInstance().getToken();
+        String token = PrefereUtils.getInstance().getToken();
         params.addBodyParameter("token", token);
         if (file != null) {
             params.addBodyParameter("avatar", file);
@@ -380,6 +395,7 @@ public class AccountManagerActivity extends BaseActivity {
     private void showToastShort(String string) {
         Toast.makeText(AccountManagerActivity.this, string, Toast.LENGTH_LONG).show();
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
@@ -389,7 +405,7 @@ public class AccountManagerActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && event.getAction() == KeyEvent.ACTION_DOWN) {
             AccountManagerActivity.this.finish();
-            AppConfig.currentTAB=MainActivity.TAB_MINE;
+            AppConfig.currentTAB = MainActivity.TAB_MINE;
             return true;
         }
         return super.onKeyDown(keyCode, event);

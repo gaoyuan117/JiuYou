@@ -35,6 +35,7 @@ import com.jiuyou.util.ToastUtil;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -109,6 +110,14 @@ public class AccountFragment extends BaseFragment implements View.OnClickListene
     public void onResume() {
         super.onResume();
         initData2();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+            initData2();
+        }
     }
 
     private void initData2() {
@@ -377,48 +386,48 @@ public class AccountFragment extends BaseFragment implements View.OnClickListene
         });
         mListView = (PullableListView) view.findViewById(R.id.finance_list);
         mListView.setAdapter(adapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                int num = Integer.valueOf(data.get(position).getQuantity());
-                if (num == 0) {
-                    Toast.makeText(context, "请选择商品数量", Toast.LENGTH_LONG)
-                            .show();
-                } else {
-                    boolean cu = !ShoppingCartAdapter.getIsSelected().get(position);
-                    ShoppingCartAdapter.getIsSelected().put(position, cu);
-                    adapter.notifyDataSetChanged();
-                    //遍历获取列表中checkbox的选中状态
-                    HashMap<Integer, Boolean> isSelected = ShoppingCartAdapter
-                            .getIsSelected();
-                    Iterator iterator = isSelected.entrySet().iterator();
-                    List<Boolean> array = new ArrayList<Boolean>();
-                    while (iterator.hasNext()) {
-                        HashMap.Entry entry = (HashMap.Entry) iterator.next();
-                        Integer key = (Integer) entry.getKey();
-                        Boolean val = (Boolean) entry.getValue();
-                        array.add(val);
-                    }
-                    if (Test.isAllFalse(array)) {
-                        checkBox_select_all.setChecked(false);
-//                        checkBox_add.setChecked(false);
-                    }
-                    if (Test.isAllTrue(array)) {
-                        checkBox_select_all.setChecked(true);
-//                        checkBox_add.setChecked(true);
-                    }
-                    if (Test.isHaveOneFasle(array)) {
-                        checkBox_select_all.setChecked(false);
-                    }
-                    if (Test.isHaveOneTrue(array)) {
-//                        checkBox_add.setChecked(true);
-                    }
-                }
-            }
-        });
+//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view,
+//                                    int position, long id) {
+//
+//                int num = Integer.valueOf(data.get(position).getQuantity());
+//                if (num == 0) {
+//                    Toast.makeText(context, "请选择商品数量", Toast.LENGTH_LONG)
+//                            .show();
+//                } else {
+//                    boolean cu = !ShoppingCartAdapter.getIsSelected().get(position);
+//                    ShoppingCartAdapter.getIsSelected().put(position, cu);
+//                    adapter.notifyDataSetChanged();
+//                    //遍历获取列表中checkbox的选中状态
+//                    HashMap<Integer, Boolean> isSelected = ShoppingCartAdapter
+//                            .getIsSelected();
+//                    Iterator iterator = isSelected.entrySet().iterator();
+//                    List<Boolean> array = new ArrayList<Boolean>();
+//                    while (iterator.hasNext()) {
+//                        HashMap.Entry entry = (HashMap.Entry) iterator.next();
+//                        Integer key = (Integer) entry.getKey();
+//                        Boolean val = (Boolean) entry.getValue();
+//                        array.add(val);
+//                    }
+//                    if (Test.isAllFalse(array)) {
+//                        checkBox_select_all.setChecked(false);
+////                        checkBox_add.setChecked(false);
+//                    }
+//                    if (Test.isAllTrue(array)) {
+//                        checkBox_select_all.setChecked(true);
+////                        checkBox_add.setChecked(true);
+//                    }
+//                    if (Test.isHaveOneFasle(array)) {
+//                        checkBox_select_all.setChecked(false);
+//                    }
+//                    if (Test.isHaveOneTrue(array)) {
+////                        checkBox_add.setChecked(true);
+//                    }
+//                }
+//            }
+//        });
     }
 
     HashMap<Integer, Boolean> selectDate;
@@ -461,7 +470,7 @@ public class AccountFragment extends BaseFragment implements View.OnClickListene
                     }
                     if (length > 0) {
                         //删除确认
-                        PopUtil.showDialog(getActivity(), "删除确认", "删除选中商品", "取消", "确定删除", null, new View.OnClickListener() {
+                        PopUtil.showDialog(getActivity(), "温馨提醒", "您确认要删除选中的商品吗？", "取消", "删除", null, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 delPro(length, selectDate);

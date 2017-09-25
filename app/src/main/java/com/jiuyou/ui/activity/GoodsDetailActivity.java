@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +50,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
     private View headView;
     private ImageCycleView goodsbanner;
     private TextView head_textView;
-    private TextView head_info;
+    private TextView head_info, head_infos;
     private List<String> banners;
     private ArrayList<String> listBanners;
     private GoodsDetailAdapter adapter;
@@ -63,6 +64,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         setContentView(R.layout.activity_goodsdetail);
         ButterKnife.bind(this);
         goodid = getIntent().getStringExtra("goodid");
+        Log.e("gy", "good_id：" + goodid);
         initView();
         initDatas();
     }
@@ -81,6 +83,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         goodsbanner = (ImageCycleView) headView.findViewById(R.id.goodsbanner);
         head_textView = (TextView) headView.findViewById(R.id.head_textView);
         head_info = (TextView) headView.findViewById(R.id.head_info);
+        head_infos = (TextView) headView.findViewById(R.id.head_infos);
         ViewGroup.LayoutParams params = goodsbanner.getLayoutParams();
         DisplayMetrics metrics = new DisplayMetrics();
         this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -110,6 +113,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                     head_textView.setText("¥" + info.getData().getPrice());
                     tvPriceOver.setText("¥" + info.getData().getOld_price());
                     head_info.setText(info.getData().getTitle());
+                    head_infos.setText(info.getData().getDescription());
                     product_id = info.getData().getId();
                     getMoreImg = info.getData().getMoreImg();
                     adapter = new GoodsDetailAdapter(info.getData().getMoreImg(), GoodsDetailActivity.this);
@@ -117,7 +121,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                     String quantity = info.getData().getQuantity();
 
 //                    if (quantity != null && Integer.parseInt(quantity) > 0) {
-                        iv_jiahao.setBackgroundResource(R.drawable.icon_gouwuche);
+                    iv_jiahao.setBackgroundResource(R.drawable.icon_gouwuche);
 //                    } else {
 //                        iv_jiahao.setBackgroundResource(R.drawable.iicon_jiahao_huise);
 //                        iv_jiahao.setClickable(false);

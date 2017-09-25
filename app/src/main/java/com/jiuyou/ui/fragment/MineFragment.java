@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jiuyou.R;
 import com.jiuyou.core.AppContext;
 import com.jiuyou.customctrls.CircleImageView;
@@ -27,6 +30,7 @@ import com.jiuyou.ui.activity.AccountManagerActivity;
 import com.jiuyou.ui.activity.AdressActivity;
 import com.jiuyou.ui.activity.AllDingDanActivity;
 import com.jiuyou.ui.activity.InviteCodeActivity;
+import com.jiuyou.ui.activity.MainActivity;
 import com.jiuyou.ui.activity.MyCommentActivity;
 import com.jiuyou.ui.activity.FeedBackActivity;
 import com.jiuyou.ui.activity.LoginActivity;
@@ -47,7 +51,7 @@ import java.util.List;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 
-public class MineFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class MineFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
     private CircleImageView img_head;
     private TextView fujin_login;
     private TextView nick_name;
@@ -67,6 +71,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private TextView tvPeiSong;
     private TextView tvYiWanCheng;
     private TextView tvTuiuan;
+    private SwipeRefreshLayout refreshLayout;
 
 
     @Nullable
@@ -91,7 +96,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         tvPeiSong = (TextView) view.findViewById(R.id.tv_my_peisongzhong);
         tvYiWanCheng = (TextView) view.findViewById(R.id.tv_my_yiwancheng);
         tvTuiuan = (TextView) view.findViewById(R.id.tv_my_tuikuan);
-
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
+        refreshLayout.setOnRefreshListener(this);
         tvDaiZhiFu.setOnClickListener(this);
         tvYiZhiFu.setOnClickListener(this);
         tvPeiSong.setOnClickListener(this);
@@ -134,10 +140,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
             btn_exit.setVisibility(View.VISIBLE);
             //登录以后可以进行更换头像昵称等操作
             nick_name.setVisibility(View.VISIBLE);
-
             UserUtils.getUserInfo(getTokenId(), new UserUtils.getUserInfoListener() {
                 @Override
                 public void load(boolean status, UserResponse info, String message) {
+                    refreshLayout.setRefreshing(false);
                     if (status) {
                         //保存用户信息
                         upDateUserStatus(info.getUserInfo());
@@ -151,9 +157,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 }
             });
         } else {
-            img_head.setImageResource(R.mipmap.icon_personal_center_user_head);
+            refreshLayout.setRefreshing(false);
+            img_head.setImageResource(R.mipmap.logo);
             btn_exit.setVisibility(View.INVISIBLE);
-            fujin_login.setText("注册/登录");
+            fujin_login.setText("登录/注册");
             nick_name.setVisibility(View.GONE);
             money.setText("¥0.00");
             rl_head.setOnClickListener(new View.OnClickListener() {
@@ -172,7 +179,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     private void showUserInfo(UserInfo info) {
-        AppContext.getImageLoaderProxy().displayImage(AppConfig.ENDPOINTPIC + info.getAvatar(), img_head);
+//        AppContext.getImageLoaderProxy().displayImage(, img_head);
+
+        Glide.with(getActivity()).load(AppConfig.ENDPOINTPIC + info.getAvatar())
+                .error(R.mipmap.logo).into(img_head);
+
         fujin_login.setText(info.getNickname());
         if (info.getCd_acc() != null) {
             nick_name.setText("智能货柜号:" + info.getCd_acc());
@@ -340,37 +351,77 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 break;
 
             case R.id.ll_my_all_dz://全部订单
-                Intent intent = new Intent(getActivity(), AllDingDanActivity.class);
-                intent.putExtra("type", "99");
-                startActivity(intent);
+                if (isLogin()) {
+                    Intent intent = new Intent(getActivity(), AllDingDanActivity.class);
+                    intent.putExtra("type", "99");
+                    startActivity(intent);
+                } else {
+                    toNext(LoginActivity.class);
+                }
+
                 break;
             case R.id.tv_my_daizhifu://待支付
-                Intent intent2 = new Intent(getActivity(), AllDingDanActivity.class);
-                intent2.putExtra("type", "0");
-                startActivity(intent2);
+                if (isLogin()) {
+                    Intent intent2 = new Intent(getActivity(), AllDingDanActivity.class);
+                    intent2.putExtra("type", "0");
+                    startActivity(intent2);
+                } else {
+                    toNext(LoginActivity.class);
+                }
+
                 break;
 
             case R.id.tv_my_yizhifu://已支付
-                Intent intent3 = new Intent(getActivity(), AllDingDanActivity.class);
-                intent3.putExtra("type", "1");
-                startActivity(intent3);
+                if (isLogin()) {
+                    Intent intent3 = new Intent(getActivity(), AllDingDanActivity.class);
+                    intent3.putExtra("type", "1");
+                    startActivity(intent3);
+                } else {
+                    toNext(LoginActivity.class);
+                }
+
                 break;
             case R.id.tv_my_peisongzhong://配送中
-                Intent intent4 = new Intent(getActivity(), AllDingDanActivity.class);
-                intent4.putExtra("type", "7");
-                startActivity(intent4);
+                if (isLogin()) {
+                    Intent intent4 = new Intent(getActivity(), AllDingDanActivity.class);
+                    intent4.putExtra("type", "7");
+                    startActivity(intent4);
+                } else {
+                    toNext(LoginActivity.class);
+                }
+
                 break;
             case R.id.tv_my_yiwancheng://已完成
-                Intent intent5 = new Intent(getActivity(), AllDingDanActivity.class);
-                intent5.putExtra("type", "9");
-                startActivity(intent5);
+                if (isLogin()) {
+                    Intent intent5 = new Intent(getActivity(), AllDingDanActivity.class);
+                    intent5.putExtra("type", "9");
+                    startActivity(intent5);
+                } else {
+                    toNext(LoginActivity.class);
+                }
+
                 break;
             case R.id.tv_my_tuikuan://退款
-                Intent intent6 = new Intent(getActivity(), AllDingDanActivity.class);
-                intent6.putExtra("type", "2");
-                startActivity(intent6);
+                if (isLogin()) {
+                    Intent intent6 = new Intent(getActivity(), AllDingDanActivity.class);
+                    intent6.putExtra("type", "2");
+                    startActivity(intent6);
+                } else {
+                    toNext(LoginActivity.class);
+                }
+
                 break;
 
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        Log.e("gy", "AppConfig：" + AppConfig.currentTAB);
+        if (!hidden) {
+            AppConfig.currentTAB = MainActivity.TAB_MINE;
+            Log.e("gy", "AppConfig：" + AppConfig.currentTAB);
         }
     }
 
@@ -380,7 +431,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private void share() {
         String uid = BaseApp.uid();
         String shareUrl = AppConfig.ENDPOINT + "/api/Invitingfriends/index.html?uid=" + uid + "&driver=" + 1;
-
         OnekeyShare oks = new OnekeyShare();
         oks.disableSSOWhenAuthorize();
         oks.setTitle("邀请好友");
@@ -391,5 +441,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         oks.setSite(getString(R.string.app_name));
         oks.setSiteUrl(shareUrl);
         oks.show(getActivity());
+    }
+
+
+    @Override
+    public void onRefresh() {
+        splashUI();
     }
 }

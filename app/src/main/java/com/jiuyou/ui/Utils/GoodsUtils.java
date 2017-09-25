@@ -1,6 +1,8 @@
 package com.jiuyou.ui.Utils;
 
 
+import android.util.Log;
+
 import com.jiuyou.core.AppContext;
 import com.jiuyou.network.interfaces.HomeApi;
 import com.jiuyou.network.response.JZBResponse.BannerResponse;

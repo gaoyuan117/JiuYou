@@ -55,7 +55,11 @@ public class OrderTimeAdapter extends BaseAdapter {
         }
 
         viewHolder.tvPopTime.setText(mList.get(i));
-
+        if(i==0){
+            viewHolder.imgSelector.setVisibility(View.VISIBLE);
+        }else {
+            viewHolder.imgSelector.setVisibility(View.GONE);
+        }
         return view;
     }
 

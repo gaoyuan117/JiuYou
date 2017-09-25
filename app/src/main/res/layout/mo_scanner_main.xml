@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/mo_scanner_bg" >
+    android:background="@drawable/mo_scanner_bg">
 
     <SurfaceView
         android:id="@+id/mo_scanner_preview_view"
@@ -20,9 +20,9 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        android:orientation="horizontal" >
+        android:layout_marginTop="80dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/mo_scanner_back"
@@ -49,15 +49,26 @@
             android:src="@drawable/mo_scanner_light_light" />
     </LinearLayout>
 
-    <TextView 
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
         android:layout_gravity="bottom"
+        android:layout_marginBottom="120dp"
+        android:gravity="center_horizontal"
+        android:text="将二维码/条码放入框内即可自动扫描"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="70dp"
         android:gravity="center_horizontal"
         android:text="二维码 扫描"
-        android:layout_marginBottom="70dp"
-        />
+        android:textSize="20sp"
+        android:visibility="gone" />
+
     <RelativeLayout
         android:id="@+id/title_bar_common_rv_viewGroup"
         android:layout_width="match_parent"
@@ -79,12 +90,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="扫一扫"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="扫一扫"
             android:textColor="@color/white"
-            android:textSize="17dp"
-            />
+            android:textSize="17dp" />
     </RelativeLayout>
 </FrameLayout>

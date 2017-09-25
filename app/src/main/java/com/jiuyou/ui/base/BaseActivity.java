@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.jiuyou.core.ActivitysManager;
 import com.jiuyou.core.AppContext;
 import com.jiuyou.customctrls.ProgressDialog;
+import com.jiuyou.global.AppManager;
 import com.jiuyou.network.response.JZBResponse.UserInfo;
 import com.jiuyou.util.ActivityAndFragmentHelper;
 import com.jiuyou.util.PrefereUtils;
@@ -33,6 +34,7 @@ public class BaseActivity extends Activity {
         ActivitysManager.getInstance().addActivity(this);
         activityHelper = new ActivityAndFragmentHelper(this);
         mPageName = this.getClass().getSimpleName();
+        AppManager.getAppManager().addActivity(this);
     }
 
     @Override
@@ -206,5 +208,7 @@ public class BaseActivity extends Activity {
     protected void showToastMsg(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
+
 
 }

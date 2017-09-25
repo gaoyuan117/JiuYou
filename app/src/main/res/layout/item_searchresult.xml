@@ -2,32 +2,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@color/translate">
+    android:background="@color/translate"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/ll_goods1"
         android:layout_width="wrap_content"
         android:layout_height="185dp"
-        android:padding="5dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="@drawable/shape_corner"
         android:orientation="vertical"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/tv_goods1"
             android:layout_width="178dp"
             android:layout_height="122dp"
             android:scaleType="centerInside"
-            android:src="@mipmap/icon_nopic"
-            />
+            android:src="@mipmap/icon_nopic" />
 
         <TextView
             android:id="@+id/tv_goodsname1"
-            android:layout_below="@id/tv_goods1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_goods1"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="12.5dp"
             android:maxLines="1"
@@ -38,28 +37,41 @@
         <TextView
             android:id="@+id/tv_goodsprice1"
             android:layout_width="wrap_content"
-            android:layout_below="@id/tv_goodsname1"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_goodsname1"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="@dimen/margin_10dp"
             android:text="¥3.00"
             android:textColor="#F5576b"
             android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_goodsprice1_over"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_toRightOf="@+id/tv_goodsprice1"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_alignBottom="@+id/tv_goodsprice1"
+            android:text="¥3.00"
+            android:textColor="@color/gray"
+            android:textSize="10sp" />
+
         <ImageView
             android:id="@+id/iv_jiahao1"
             android:layout_width="@dimen/margin_15dp"
             android:layout_height="@dimen/margin_15dp"
-            android:layout_marginBottom="6dp"
-            android:layout_marginRight="6dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_marginBottom="6dp"
+            android:layout_marginRight="6dp"
             android:background="@mipmap/icon_jiahao_home" />
 
     </RelativeLayout>
+
     <com.jiuyou.customctrls.XCRoundRectImageView
         android:id="@+id/iv_shouwan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_shouwan"
-        />
+        android:src="@drawable/icon_shouwan" />
 </RelativeLayout>

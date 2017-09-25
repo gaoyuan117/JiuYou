@@ -37,7 +37,7 @@ public final class AppConfig {
 
     public static final String driver = "android";
 
-    public static final int pageSize = 10;
+    public static final int pageSize = 100;
     public static String currentTAB = "";
     public static String currentOrder_Id = "";
     public static String DisCount = "75";
@@ -72,12 +72,12 @@ public final class AppConfig {
 
     // 服务器地址
     // public static final String ENDPOINT = DEBUG ? "http://192.168.1.233:8080"
-
     //    public static String ENDPOINT = "http://dev.api.digidou.com/dos/classroom/interface";
     //线下
 //     public static String ENDPOINT = "http://192.168.1.20/cupboard";
     //线上
     public static String ENDPOINT = "http://jiuks.jzbwlkj.com";
+//        public static String ENDPOINT = "http://www.jiuyou919.com";
     //线上图片
     public static String ENDPOINTPIC = ENDPOINT + "/Uploads/";
 
@@ -125,6 +125,5 @@ public final class AppConfig {
     public static final String PAY = "forgotten";
 
     public static final String FORGOTTEN = "forgotten";
-
 
 }

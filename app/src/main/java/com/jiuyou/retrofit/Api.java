@@ -79,7 +79,7 @@ public interface Api {
     //订单详情
     @FormUrlEncoded
     @POST("api/order/order_info")
-    Observable<HttpResult<OrderInfoBean>> orderInfo(@Field("token") String token, @Field("order_id") String order_id);
+    Observable<HttpResult<OrderInfoBean>> orderInfo(@Field("token") String token, @Field("order_no") String order_id);
 
     //订单详情
     @FormUrlEncoded
@@ -118,5 +118,5 @@ public interface Api {
     //确认收货
     @FormUrlEncoded
     @POST("/api/order/refuseGoods")
-    Observable<HttpResult<CommonBean>> refuseGoods(@Field("token") String token, @Field("order_id") String order_id);
+    Observable<HttpResult<CommonBean>> refuseGoods(@Field("token") String token, @Field("order_id") String order_id, @Field("reason") String reason);
 }

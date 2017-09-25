@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jiuyou.R;
 import com.jiuyou.core.AppContext;
 import com.jiuyou.customctrls.RoundImageView;
@@ -76,7 +77,9 @@ public class MyCommentListAdapter extends BaseAdapter {
         holder.tv_leave_time.setText(DateUtils.transForDate3(time));
         holder.tv_name.setText(list.get(position).getProduct_name());
         holder.tv_leave_connect.setText(list.get(position).getComment());
-        AppContext.getImageLoaderProxy().displayImage(AppConfig.ENDPOINTPIC+list.get(position).getMaster_img(),holder.comment_portrait);
+        Glide.with(mContext).load(AppConfig.ENDPOINTPIC+list.get(position).getMaster_img()).placeholder(R.mipmap.logo)
+                .error(R.mipmap.logo)
+                .into(holder.comment_portrait);
         return convertView;
     }
     static class ViewHolder {

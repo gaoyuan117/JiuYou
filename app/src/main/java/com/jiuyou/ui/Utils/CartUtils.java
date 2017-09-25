@@ -73,9 +73,9 @@ public class CartUtils {
     /**
      * 获取订单号接口
      */
-    public static void toTrade(String rec_id, String pickup_mode, String send_time, String pay_type, String token, String[] ids, final toTradeListener listener) {
+    public static void toTrade(String rec_id, String pickup_mode, String send_time, String pay_type, String token, String[] ids,String send_type, final toTradeListener listener) {
         HomeApi api = getHomeApi();
-        api.toTrade(token, rec_id, pickup_mode, send_time, pay_type, ids, new Callback<PayResponse>() {
+        api.toTrade(token, rec_id, pickup_mode, send_time, pay_type,send_type, ids, new Callback<PayResponse>() {
             @Override
             public void success(PayResponse cartResponse, Response response) {
                 if (cartResponse.getCode() == 200) {

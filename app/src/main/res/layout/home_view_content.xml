@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F1F1F1"
     android:orientation="vertical">
 
@@ -24,9 +25,19 @@
                 android:orientation="vertical">
 
                 <com.jiuyou.customctrls.ImageCycleView
+                    android:visibility="gone"
                     android:id="@+id/homebanner1"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp" />
+                    android:layout_height="wrap_content" />
+
+                <com.jiuyou.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="240dp"
+                    app:indicator_height="8dp"
+                    app:indicator_margin="6dp"
+                    app:indicator_drawable_selected="@drawable/select_circle"
+                    app:indicator_width="8dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

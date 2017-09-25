@@ -73,9 +73,9 @@ public class ChangePayPasswordActivity extends BaseActivity {
         checkPhoneAndPwd = new CheckPhoneAndPwd();
         setTitle("修改支付密码");
         edt_new_pwd2.setHint("请输入新密码（6位）");
-        edt_new_pwd2.setInputType(InputType.TYPE_CLASS_NUMBER);
+//        edt_new_pwd2.setInputType(InputType.TYPE_CLASS_NUMBER);
         edt_new_pwd3.setHint("请再次输入新密码（6位）");
-        edt_new_pwd3.setInputType(InputType.TYPE_CLASS_NUMBER);
+//        edt_new_pwd3.setInputType(InputType.TYPE_CLASS_NUMBER);
         setAllClick();
     }
 

@@ -60,7 +60,7 @@
             android:layout_height="71dp"
             android:layout_marginLeft="23dp"
             android:layout_marginTop="@dimen/margin_10dp"
-            android:src="@mipmap/icon_personal_center_user_head"
+            android:src="@mipmap/logo"
             />
 
         <LinearLayout

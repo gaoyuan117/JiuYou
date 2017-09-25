@@ -48,7 +48,7 @@ public class AboutActivity extends BaseActivity implements OnClickListener {
                 if (status) {
 //                    tv_appname.setText(info.getInfos().get(0).getApp_name());
 //                    tv_company.setText(info.getInfos().get(0).getCompany());
-                    tv_appname.setText("酒水商城");
+//                    tv_appname.setText("酒水商城");
                 } else {
                     ToastUtil.show(message);
                 }

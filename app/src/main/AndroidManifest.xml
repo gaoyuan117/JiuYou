@@ -96,6 +96,7 @@
 
         <activity
             android:name=".ui.activity.MainActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppBlackStatusBar"
             android:windowSoftInputMode="adjustPan" />
@@ -381,7 +382,9 @@
         <activity android:name=".ui.activity.SelectPsTypeActivity" />
         <activity android:name=".ui.activity.PaySuccess2Activity" />
         <activity android:name=".ui.activity.RefuseActivity" />
-        <activity android:name=".ui.activity.YanZhengResultActivity"></activity>
+        <activity android:name=".ui.activity.YanZhengResultActivity" />
+        <activity android:name=".ui.activity.ConfirmOrder2Activity" />
+        <activity android:name=".ui.activity.WebViewActivity"></activity>
     </application>
 
 </manifest>

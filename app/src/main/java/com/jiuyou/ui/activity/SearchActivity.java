@@ -2,8 +2,10 @@ package com.jiuyou.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -189,6 +191,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 viewHolder.tv_goodsprice1 = (TextView) convertView.findViewById(R.id.tv_goodsprice1);
                 viewHolder.iv_jiahao1 = (ImageView) convertView.findViewById(R.id.iv_jiahao1);
                 viewHolder.iv_shouwan=(XCRoundRectImageView) convertView.findViewById(R.id.iv_shouwan);
+                viewHolder.tv_goodsprice1_over=(TextView) convertView.findViewById(R.id.tv_goodsprice1_over);
                 convertView.setTag(viewHolder);
 
             }else {
@@ -212,9 +215,11 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     SearchActivity.this.finish();
                 }
             });
+            viewHolder.tv_goodsprice1_over.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             AppContext.getInstance().getImageLoader().displayImage(AppConfig.ENDPOINTPIC+searchResultResponse.getData().get(position).getMasterImg(),viewHolder.tv_goods1);
             viewHolder.tv_goodsname1.setText(searchResultResponse.getData().get(position).getTitle());
             viewHolder.tv_goodsprice1.setText("¥"+searchResultResponse.getData().get(position).getPrice());
+            viewHolder.tv_goodsprice1_over.setText("¥"+searchResultResponse.getData().get(position).getOld_price());
             viewHolder.iv_jiahao1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -223,7 +228,8 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                         AppConfig.currentTAB=MainActivity.TAB_ACCOUNT;
                         SearchActivity.this.finish();
                     } else {
-                        LoginUtil.showLogin(SearchActivity.this, LoginActivity.class);
+//                        LoginUtil.showLogin(SearchActivity.this, LoginActivity.class);
+                        SearchActivity.this.startActivity(new Intent(SearchActivity.this,LoginActivity.class));
                     }
 
                 }
@@ -238,6 +244,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             private ImageView tv_goods1;
             private TextView tv_goodsname1;
             private TextView tv_goodsprice1;
+            private TextView tv_goodsprice1_over;
             private ImageView iv_jiahao1;
             private XCRoundRectImageView iv_shouwan;
         }

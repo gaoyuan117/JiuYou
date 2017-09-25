@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/margin_20dp"
-                android:text="请选择退货理由"
+                android:text="请选择拒绝收货理由"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:button="@drawable/rg_selector"
                     android:padding="10dp"
-                    android:text="此商品为非正品"
+                    android:text="有非正品商品"
                     android:textColor="@color/text_gray"
                     android:textSize="18sp" />
 
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:button="@drawable/rg_selector"
                     android:padding="10dp"
-                    android:text="商品破损"
+                    android:text="有破损商品"
                     android:textColor="@color/text_gray"
                     android:textSize="18sp" />
 

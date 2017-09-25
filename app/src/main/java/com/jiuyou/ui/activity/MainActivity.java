@@ -2,6 +2,7 @@ package com.jiuyou.ui.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -91,16 +92,43 @@ public class MainActivity extends BaseFragmentActivity {
         setContentView(R.layout.activity_main);
         showContacts();
         init();
+
+//        showDialog();
+    }
+
+    private void showDialog() {
+        View view = View.inflate(this, R.layout.home, null);
+        final Dialog dialog = new Dialog(this, R.style.dialog_type);
+        ImageView backImg = (ImageView) view.findViewById(R.id.ing_home_close);
+        ImageView img = (ImageView) view.findViewById(R.id.img_home);
+        dialog.setContentView(view);
+        dialog.show();
+
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, WebViewActivity.class));
+                dialog.dismiss();
+            }
+        });
+
     }
 
     @Override
     protected void onResume() {
         if (AppConfig.currentTAB != "") {
-            if (AppConfig.currentTAB.equals(MainActivity.TAB_HOME)) {
-            } else {
-                setTabSelection(AppConfig.currentTAB);
-            }
-
+//            if (AppConfig.currentTAB.equals(MainActivity.TAB_HOME)) {
+//            } else {
+//                setTabSelection(AppConfig.currentTAB);
+//            }
+            setTabSelection(AppConfig.currentTAB);
         }
         super.onResume();
     }

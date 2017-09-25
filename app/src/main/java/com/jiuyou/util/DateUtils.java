@@ -159,6 +159,20 @@ public class DateUtils {
         }
         return "";
     }
+
+    public static String transForDate4(Integer ms){
+        if(ms==null){
+            ms=0;
+        }
+        long msl=(long)ms*1000;
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date temp=null;
+        if(ms!=null){
+            String str=sdf.format(msl);
+            return str;
+        }
+        return "";
+    }
     public static String getDateByTimestamp(long times) {
         try {
             return new SimpleDateFormat("yyyy-MM-dd")

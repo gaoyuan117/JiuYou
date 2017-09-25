@@ -179,7 +179,7 @@ public interface HomeApi {
      */
     @FormUrlEncoded
     @POST("/api/order/rechargeOrder")
-    void rechargeOrder(@Field("token") String token, @Field("amount") double amount, @Field("pay_channel") String pay_channel, Callback<AmountResponse> cb);
+    void rechargeOrder(@Field("driver") String driver,@Field("token") String token, @Field("amount") double amount, @Field("pay_channel") String pay_channel, Callback<AmountResponse> cb);
 
     /**
      * 关于接口
@@ -233,6 +233,7 @@ public interface HomeApi {
                  @Field("pickup_mode") String pickup_mode,
                  @Field("send_time") String send_time,
                  @Field("pay_type") String pay_type,
+                 @Field("send_type") String send_type,
                  @Field("cart_id[]") String[] cart_id, Callback<PayResponse> cb);
 
     /**

@@ -24,7 +24,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class FeedBackActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener{
+public class FeedBackActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     @Bind(R.id.title_bar_operate_1)
     ImageView title_bar_operate_1;
     @Bind(R.id.et_comment_input)
@@ -33,7 +33,7 @@ public class FeedBackActivity extends BaseActivity implements View.OnClickListen
     EditText edt_phone;
     @Bind(R.id.textView)
     TextView textView;
-    String phoneRegex = "^1[35789]\\d{9}$";
+    String phoneRegex = "^1[435789]\\d{9}$";
     boolean isPhone = false;
 
     @Override
@@ -44,9 +44,9 @@ public class FeedBackActivity extends BaseActivity implements View.OnClickListen
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         title_bar_operate_1.setOnClickListener(this);
-        et_comment_input.addTextChangedListener(new CommonUtil.TextNoEmojiWatcher(et_comment_input,FeedBackActivity.this));
+        et_comment_input.addTextChangedListener(new CommonUtil.TextNoEmojiWatcher(et_comment_input, FeedBackActivity.this));
         edt_phone.addTextChangedListener(phoneTextWatch);
         textView.setOnClickListener(this);
     }
@@ -59,23 +59,29 @@ public class FeedBackActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.title_bar_operate_1:
                 FeedBackActivity.this.finish();
-                AppConfig.currentTAB=MainActivity.TAB_MINE;
+                AppConfig.currentTAB = MainActivity.TAB_MINE;
                 break;
             case R.id.textView:
-              if(checkContent(et_comment_input.getText().toString().trim())){
-                  UserUtils.getFeedBask(PrefereUtils.getInstance().getToken(), et_comment_input.getText().toString().trim(), edt_phone.getText().toString().trim(), new UserUtils.getFeedBaskListener() {
-                      @Override
-                      public void load(boolean status, GoodsResponse info, String message) {
-                          if(status){
-                              ToastUtil.show("反馈提交成功");
-                              finish();
-                          }
-                      }
-                  });
-              }
+
+                if (checkContent(et_comment_input.getText().toString().trim())) {
+                    String phone = edt_phone.getText().toString().trim();
+                    if (TextUtils.isEmpty(phone)) {
+                        showToastMsg("请输入正确的手机号码");
+                        return;
+                    }
+                    UserUtils.getFeedBask(PrefereUtils.getInstance().getToken(), et_comment_input.getText().toString().trim(), phone, new UserUtils.getFeedBaskListener() {
+                        @Override
+                        public void load(boolean status, GoodsResponse info, String message) {
+                            if (status) {
+                                ToastUtil.show("反馈提交成功");
+                                finish();
+                            }
+                        }
+                    });
+                }
                 break;
 
         }
@@ -126,12 +132,13 @@ public class FeedBackActivity extends BaseActivity implements View.OnClickListen
             ToastUtil.show("提交内容不能为空");
             return false;
         }
-        if (content.length()<10||content.length()>300) {
+        if (content.length() < 10 || content.length() > 300) {
             ToastUtil.show("限10-300字");
             return false;
         }
         return true;
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
@@ -141,7 +148,7 @@ public class FeedBackActivity extends BaseActivity implements View.OnClickListen
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && event.getAction() == KeyEvent.ACTION_DOWN) {
             FeedBackActivity.this.finish();
-            AppConfig.currentTAB=MainActivity.TAB_MINE;
+            AppConfig.currentTAB = MainActivity.TAB_MINE;
             return true;
         }
         return super.onKeyDown(keyCode, event);

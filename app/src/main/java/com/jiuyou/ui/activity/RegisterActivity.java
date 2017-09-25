@@ -137,7 +137,7 @@ public class RegisterActivity extends BaseActivity {
                 }
                 Log.e("gy", "推荐人：" + s);
                 getLoadingDataBar().show();
-                UserUtils.getRegisterInfo(code, phone, MD5Utils.md5(pwd.getBytes()), AppConfig.driver, s, new UserUtils.getRegisterListener() {
+                UserUtils.getRegisterInfo(code, phone, MD5Utils.toMD5(pwd), AppConfig.driver, s, new UserUtils.getRegisterListener() {
                     @Override
                     public void load(boolean status, GoodsResponse info, String message) {
                         if (status) {
@@ -231,7 +231,7 @@ public class RegisterActivity extends BaseActivity {
         return true;
     }
 
-    String phoneRegex = "^1[35789]\\d{9}$";
+//    String phoneRegex = "^1[345789]\\d{9}$";
     boolean isPhone = false, isPwd = false;
     TextWatcher phoneTextWatch = new TextWatcher() {
         @Override
@@ -276,10 +276,10 @@ public class RegisterActivity extends BaseActivity {
             ToastUtil.show("手机号不能为空");
             return false;
         }
-        if (!phone.matches(phoneRegex)) {
-            ToastUtil.show("手机号格式不对");
-            return false;
-        }
+//        if (!phone.matches(phoneRegex)) {
+//            ToastUtil.show("手机号格式不对");
+//            return false;
+//        }
         return true;
     }
 

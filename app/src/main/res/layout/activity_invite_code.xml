@@ -14,6 +14,15 @@
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="70dp" />
+        android:layout_marginTop="70dp"
+        android:src="@color/account_manager_txt_color2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="24dp"
+        android:text="扫码加入酒快送，享受VIP最高优惠礼遇及积分政策，优先参与酒快送大型品鉴会。\n加入酒快送，成为合伙人。" />
 
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.jiuyou.ui.activity;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -56,6 +57,7 @@ public class ChangeLoginPassWordActivity extends BaseActivity {
             isPay=true;
             setTitle("修改支付密码");
             edt_old_pwd.setHint("请输入旧密码（6位）");
+
             edt_old_pwd.setInputType(InputType.TYPE_CLASS_NUMBER);
             edt_new_pwd2.setHint("请输入新密码（6位）");
             edt_new_pwd2.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -112,10 +114,11 @@ public class ChangeLoginPassWordActivity extends BaseActivity {
                 //修改登录密码
                     if(CheckInput()){
                         String token=PrefereUtils.getInstance().getToken();
-                        String oldpwd=MD5Utils.md5(old_pwd.trim().getBytes());
-                       String new1= MD5Utils.md5(new_pwd1.trim().getBytes());
-                        String new2=MD5Utils.md5(new_pwd2.trim().getBytes());
+                        String oldpwd=MD5Utils.toMD5(old_pwd.trim());
+                       String new1= MD5Utils.toMD5(new_pwd1.trim());
+                        String new2=MD5Utils.toMD5(new_pwd2.trim());
                         Log.e("tgh","token="+token+"oldpwd="+oldpwd+"newpwd="+new1+"repwd="+new2);
+
                         UserUtils.setLoginInfo(token,oldpwd , new1,new2 , new UserUtils.setLoginListener() {
                          @Override
                          public void load(boolean status, UserResponse info, String message) {

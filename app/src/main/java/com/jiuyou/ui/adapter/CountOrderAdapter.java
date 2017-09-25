@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jiuyou.R;
 import com.jiuyou.core.AppContext;
 import com.jiuyou.customctrls.RoundImageView;
@@ -72,7 +73,8 @@ public class CountOrderAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         Cart cart=list.get(position);
-        AppContext.getInstance().getImageLoader().displayImage(AppConfig.ENDPOINTPIC+cart.getMasterImg(),holder.pic_goods);
+//        AppContext.getInstance().getImageLoader().displayImage(,);
+        Glide.with(mContext).load(AppConfig.ENDPOINTPIC+cart.getMasterImg()).error(R.mipmap.logo).into(holder.pic_goods);
         holder.color_goods.setText(cart.getTitle());
         holder.integral_goods.setText("¥"+cart.getPrice());
         holder.tv_pronum.setText("x"+cart.getQuantity());

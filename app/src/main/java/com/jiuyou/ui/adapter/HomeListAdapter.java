@@ -21,6 +21,7 @@ import com.jiuyou.network.response.JZBResponse.CartResponse;
 import com.jiuyou.network.response.JZBResponse.HomeDataList;
 import com.jiuyou.ui.Utils.CartUtils;
 import com.jiuyou.ui.activity.GoodsDetailActivity;
+import com.jiuyou.ui.activity.LoginActivity;
 import com.jiuyou.ui.activity.MainActivity;
 import com.jiuyou.util.PrefereUtils;
 import com.jiuyou.util.ToastUtil;
@@ -100,8 +101,7 @@ public class HomeListAdapter extends BaseAdapter {
             holder.tv_goodsname1.setText(mDatas.get(position).getTitle());
             holder.tv_goodsprice1.setText("¥" + mDatas.get(position).getPrice());
 
-            Log.e("gy", "图片：" + mDatas.get(position).getMasterImg());
-            Glide.with(activity).load(AppConfig.ENDPOINTPIC + mDatas.get(position).getMasterImg()).diskCacheStrategy(DiskCacheStrategy.ALL).error(R.mipmap.icon_nopic).into(holder.tv_goods1);
+            Glide.with(activity).load(AppConfig.ENDPOINTPIC + mDatas.get(position).getMasterImg()).diskCacheStrategy(DiskCacheStrategy.ALL).error(R.mipmap.logo).into(holder.tv_goods1);
             holder.ll_goods1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -115,18 +115,25 @@ public class HomeListAdapter extends BaseAdapter {
             holder.iv_jiahao1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CartUtils.getchangeCart(PrefereUtils.getInstance().getToken(), "add", mDatas.get(position).getId(), "1", new CartUtils.getChangeCartListener() {
-                        @Override
-                        public void load(boolean status, CartResponse info, String message) {
-                            if (status) {
-                                AppConfig.currentTAB = MainActivity.TAB_ACCOUNT;
-                                activity.setTabSelection(MainActivity.TAB_ACCOUNT);
-                            } else {
-                                ToastUtil.show(message);
-                            }
 
-                        }
-                    });
+                    if (PrefereUtils.getInstance().isLogin()) {
+                        CartUtils.getchangeCart(PrefereUtils.getInstance().getToken(), "add", mDatas.get(position).getId(), "1", new CartUtils.getChangeCartListener() {
+                            @Override
+                            public void load(boolean status, CartResponse info, String message) {
+                                if (status) {
+                                    AppConfig.currentTAB = MainActivity.TAB_ACCOUNT;
+                                    activity.setTabSelection(MainActivity.TAB_ACCOUNT);
+                                } else {
+                                    ToastUtil.show(message);
+                                }
+
+                            }
+                        });
+                    } else {
+                        activity.toNext(LoginActivity.class);
+                    }
+
+
                 }
             });
         }

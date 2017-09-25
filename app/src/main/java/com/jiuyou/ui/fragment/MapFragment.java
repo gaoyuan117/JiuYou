@@ -185,7 +185,7 @@ public class MapFragment extends BaseFragment implements View.OnClickListener, S
                         if (cups != null && cups.size() > 0) {
                             initOverlayCup();
                         } else {
-                            ToastUtil.show("周边没有合适的货柜！");
+                            ToastUtil.show("周边没有合适的商家！");
                         }
                     } else {
                         mBaiduMap.clear();
@@ -230,7 +230,7 @@ public class MapFragment extends BaseFragment implements View.OnClickListener, S
                     if (cups != null && cups.size() > 0) {
                         initOverlayCup();
                     } else {
-                        ToastUtil.show("周边没有合适的货柜！");
+                        ToastUtil.show("周边没有合适的商家！");
                     }
                 } else {
                     mBaiduMap.clear();
@@ -456,7 +456,7 @@ public class MapFragment extends BaseFragment implements View.OnClickListener, S
                                 Double la = Double.parseDouble(lists.get(i).getLat());
                                 Double lo = Double.parseDouble(lists.get(i).getLng());
                                 if (la == marker.getPosition().latitude && lo == marker.getPosition().longitude) {
-                                    title.setText(lists.get(i).getAddress());
+                                    title.setText(lists.get(i).getCupboard_name());
                                     des.setText(lists.get(i).getAddress());
                                 }
                             }

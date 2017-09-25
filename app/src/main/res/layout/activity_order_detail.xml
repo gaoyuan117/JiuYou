@@ -177,12 +177,22 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:src="@mipmap/logo"
                     android:id="@+id/tv_order_detail_erweima"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="16dp"
                     android:layout_marginTop="16dp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_marginBottom="16dp"
+                    android:id="@+id/tv_order_detail_nearby2"
+                    style="@style/order_detail_tv"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:text="查看附近商家"
                     android:visibility="gone" />
 
             </LinearLayout>

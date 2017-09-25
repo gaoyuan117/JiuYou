@@ -55,7 +55,7 @@ public class RefuseActivity extends BaseActivity {
         orderId = getIntent().getStringExtra("orderId");
         position = getIntent().getIntExtra("position", -1);
 
-        tvRefuseNo.setText(orderNo);
+        tvRefuseNo.setText("单号："+orderNo);
     }
 
     @OnClick({R.id.rg_refuse_jia, R.id.rg_refuse_po, R.id.ll_refuse_input, R.id.tv_refuse})
@@ -89,7 +89,7 @@ public class RefuseActivity extends BaseActivity {
      * 拒绝收货
      */
     public void refuseGoods() {
-        RetrofitClient.getInstance().createApi().refuseGoods(BaseApp.token(), orderId)
+        RetrofitClient.getInstance().createApi().refuseGoods(BaseApp.token(), orderId, reason)
                 .compose(RxUtils.<HttpResult<CommonBean>>io_main())
                 .subscribe(new BaseObjObserver<CommonBean>(this, "拒绝收货中") {
                     @Override
@@ -100,7 +100,6 @@ public class RefuseActivity extends BaseActivity {
                         intent.putExtra("status", "10");
                         setResult(RESULT_OK, intent);
                         finish();
-
                     }
                 });
     }

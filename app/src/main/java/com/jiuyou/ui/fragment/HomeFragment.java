@@ -20,10 +20,13 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.jiuyou.Banner;
+import com.jiuyou.MyImageLoader;
 import com.jiuyou.customctrls.CustomSwipRefresh;
 import com.jiuyou.customctrls.HomeView;
 import com.jiuyou.customctrls.MyScrollView;
 import com.jiuyou.network.response.JZBResponse.BannerData;
+import com.jiuyou.network.response.JZBResponse.BannerResponse1;
 import com.jiuyou.ui.activity.GoodsDetailActivity;
 import com.jiuyou.ui.activity.MainActivity;
 import com.jiuyou.ui.base.OnPageEventListener;
@@ -45,22 +48,26 @@ import com.jiuyou.ui.base.BaseFragment;
 import com.jiuyou.util.ScreenUtils;
 import com.jiuyou.util.ToastUtil;
 
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerClickListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends BaseFragment implements View.OnClickListener, OnPageEventListener {
+public class HomeFragment extends BaseFragment implements View.OnClickListener, OnPageEventListener, OnBannerClickListener {
 
     private View view;
     private ImageView search_filter, erweima;
     private TextView edt_search;
     private ImageCycleView mHomeBanner;
-    private ArrayList<String> picStr;
+    Banner mBanner;
+    private List<String> picStr;
     private List<DataBanner> dataList;
     private List<Category> categories;
     private StringAdapter mAdapter;
     private List<BannerData> mBanners;
-    boolean isFirst = true;
     private HomeListAdapter adapter;
     private Context mConText;
     private PopupWindow pop;
@@ -96,17 +103,19 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         }
 
         mConText = getActivity();
-//                initData();
         return view;
     }
 
     @Override
     public View initView() {
+        picStr = new ArrayList<>();
         contentview = LayoutInflater.from(getActivity()).inflate(R.layout.home_view_content, null, false);
         pro_all = (TextView) contentview.findViewById(R.id.pro_all);
         pro_all.setText("全部商品");
         myGridView = (MyGridView) contentview.findViewById(R.id.gridview);
         mHomeBanner = (ImageCycleView) contentview.findViewById(R.id.homebanner1);
+        mBanner = (Banner) contentview.findViewById(R.id.banner);
+        mBanner.setOnBannerClickListener(this);
         ViewGroup.LayoutParams params = mHomeBanner.getLayoutParams();
         DisplayMetrics metrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -114,12 +123,16 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         params.height = (int) (widthPixels / 1.33);
         mHomeBanner.setLayoutParams(params);
         srfl_my_dynamic = (CustomSwipRefresh) contentview.findViewById(R.id.refresh_view);
+
         srfl_my_dynamic.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 mCurrentPage = 0;
-                dataList.clear();
+                if(data_list!=null){
+                    dataList.clear();
+                }
                 initInfos();
+                getBanners();
                 if (srfl_my_dynamic.isRefreshing()) {
                     srfl_my_dynamic.setRefreshing(false);
                 }
@@ -134,7 +147,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 /**这里遇到一个问题，当数据加载完成后，向上滑动ScrollView,还会提示一遍“没有更多数据了”，所以多加了一个向下滑动的标记isTop;如果是判断向下滑动，并且isBottom是滑动到了最低端才加载数据**/
                 if (isBottom && scrollView.isTop() && !isRefresh) {
                     isRefresh = true;
-                    //GetToast.showToast(ScrollingActivity.this,isBottom+"");
                     if (srfl_my_dynamic.isRefreshing()) {
                         srfl_my_dynamic.setRefreshing(false);
                     }
@@ -142,7 +154,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                     if (mCurrentPage <= Integer.parseInt(totalPage)) {
                         loadMoreData(mCurrentPage);
                     } else {
-                        ToastUtil.show("没有更多数据！");
+                        ToastUtil.show("没有更多商品了！");
                     }
                     handler.sendEmptyMessageDelayed(0, 1000);
                 } else {
@@ -211,7 +223,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
 
     private void initData() {
-        initCircleImageView();
+//        initCircleImageView();
+        getBanners();
         initInfos();
         initCatagory();
     }
@@ -238,40 +251,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 }
             }
         });
-    }
-
-    private void initCircleImageView() {
-        //请求首页横幅广告
-        if (AppConfig.bannerDatas != null) {
-            mBanners = AppConfig.bannerDatas;
-            if (picStr == null) {
-                isFirst = true;
-                picStr = new ArrayList<String>();
-
-            } else {
-                isFirst = false;
-            }
-
-            if (picStr != null) {
-                picStr.clear();
-            }
-            for (int i = 0; i < mBanners.size(); i++) {
-                picStr.add(AppConfig.ENDPOINTPIC + mBanners.get(i).getBanner());
-            }
-
-            if (isFirst) {
-                mHomeBanner.setGuideGravity(true);
-                if (picStr != null && picStr.size() > 0) {
-                    mHomeBanner.setImageResources2(getActivity().getApplication(), picStr, mAdCycleViewListener, 1);
-                }
-            } else {
-                if (picStr != null && picStr.size() > 0) {
-                    mHomeBanner.refresh();
-                }
-            }
-            mHomeBanner.setCurrentItem(50);
-
-        }
     }
 
     //网络请求首页展示信息
@@ -318,6 +297,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
                 } else {
                     if (!message.equals("")) {
+                        List<HomeDataList> data_list = new ArrayList<HomeDataList>();
+                        adapter = new HomeListAdapter((MainActivity) getActivity(), data_list);
+                        myGridView.setAdapter(adapter);
                         ToastUtil.show(message);
                     }
 
@@ -353,9 +335,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         @Override
         public void onImageClick(int position, View imageView) {
 //                        ToastUtil.show("进入商品详情");
-            Intent intent = new Intent(getActivity(), GoodsDetailActivity.class);
-            intent.putExtra("goodid", mBanners.get(position).getId());
-            getActivity().startActivity(intent);
+
         }
     };
 
@@ -387,6 +367,17 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             String result = scanResult.getContents();
             Log.d("code", result);
             ToastUtil.show(result);
+        }
+    }
+
+    @Override
+    public void OnBannerClick(int position) {
+        try {
+            Intent intent = new Intent(getActivity(), GoodsDetailActivity.class);
+            intent.putExtra("goodid", mBanners.get(position - 1).getId());
+            getActivity().startActivity(intent);
+        } catch (Exception e) {
+
         }
     }
 
@@ -448,4 +439,54 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     }
 
 
+    /**
+     * set Banner
+     */
+    private void setBanner(List<String> list) {
+        //设置banner样式
+        ViewGroup.LayoutParams params = mBanner.getLayoutParams();
+        DisplayMetrics metrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int widthPixels = metrics.widthPixels;
+        params.height = (int) (widthPixels / 1.33);
+        mBanner.setLayoutParams(params);
+
+        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        //设置图片加载器
+        mBanner.setImageLoader(new MyImageLoader());
+        //设置图片集合
+        mBanner.setImages(list);
+        //设置banner动画效果
+        mBanner.setBannerAnimation(Transformer.Default);
+        //设置自动轮播，默认为true
+        mBanner.isAutoPlay(true);
+        mBanner.setViewPagerIsScroll(true);
+        //设置轮播时间
+        mBanner.setDelayTime(3000);
+        //设置指示器位置（当banner模式中有指示器时）
+        mBanner.setIndicatorGravity(BannerConfig.CENTER);
+        //banner设置方法全部调用完毕时最后调用
+        mBanner.start();
+    }
+
+    private void getBanners() {
+        GoodsUtils.getHomeBanner(new GoodsUtils.getHomeBannerListener() {
+            @Override
+            public void load(boolean status, BannerResponse1 info, String message) {
+                if (status) {
+                    if (picStr == null) {
+                        return;
+                    }
+                    picStr.clear();
+                    mBanners = info.getData();
+                    Log.e("gy", "信息：" + info.getData().size());
+                    for (int i = 0; i < info.getData().size(); i++) {
+                        picStr.add(info.getData().get(i).getBanner());
+                    }
+
+                    setBanner(picStr);
+                }
+            }
+        });
+    }
 }

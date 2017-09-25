@@ -24,6 +24,7 @@ import com.sheyuan.universalimageloader.core.DisplayImageOptions;
 import com.jiuyou.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 广告图片自动轮播控件</br>
@@ -78,9 +79,9 @@ public class ImageCycleView extends LinearLayout {
 
     private DisplayImageOptions options = new DisplayImageOptions.Builder()
             .cacheInMemory(true).cacheOnDisk(true)
-            .showImageForEmptyUri(R.mipmap.icon_nopic)
-            .showImageOnFail(R.mipmap.icon_nopic)
-            .showImageOnLoading(R.mipmap.icon_nopic)
+            .showImageForEmptyUri(R.mipmap.logo)
+            .showImageOnFail(R.mipmap.logo)
+            .showImageOnLoading(R.mipmap.logo)
             .bitmapConfig(Bitmap.Config.RGB_565)
             .build();
 
@@ -145,7 +146,7 @@ public class ImageCycleView extends LinearLayout {
             LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT);
             params.leftMargin = 30;
-            mImageView.setScaleType(ScaleType.CENTER_CROP);
+//            mImageView.setScaleType(ScaleType.CENTER_CROP);
             mImageView.setLayoutParams(params);
 
             mImageViews[i] = mImageView;
@@ -178,57 +179,62 @@ public class ImageCycleView extends LinearLayout {
     }
 
 
-
-    public void setImageResources2(Application mApplication,ArrayList<String> adStrList,
+    public void setImageResources2(Application mApplication, ArrayList<String> adStrList,
                                    ImageCycleViewListener imageCycleViewListener, int stype) {
-        this.stype = stype;
-        // 清除
-        mGroup.removeAllViews();
-        // 图片广告数量
-        final int imageCount = adStrList.size();
-        mImageViews = new ImageView[imageCount];
-        for (int i = 0; i < imageCount; i++) {
-            mImageView = new ImageView(mContext);
-            LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,
-                    LayoutParams.WRAP_CONTENT);
-            params.leftMargin = 30;
-            params.gravity = Gravity.CENTER;
+        try {
+
+
+            this.stype = stype;
+            // 清除
+            mGroup.removeAllViews();
+            // 图片广告数量
+            final int imageCount = adStrList.size();
+            mImageViews = new ImageView[imageCount];
+            for (int i = 0; i < imageCount; i++) {
+                mImageView = new ImageView(mContext);
+                LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,
+                        LayoutParams.WRAP_CONTENT);
+                params.leftMargin = 30;
+                params.gravity = Gravity.CENTER;
 //			mImageView.setScaleType(ScaleType.CENTER_CROP);
-            mImageView.setLayoutParams(params);
+                mImageView.setLayoutParams(params);
 
-            mImageViews[i] = mImageView;
-            if (i == 0) {
-                if (this.stype == 1)
-                    // mImageViews[i].setBackgroundResource(R.mipmap.banner_dian_focus);
-                    mImageViews[i]
-                            .setBackgroundResource(R.mipmap.banner_cicle_notchoose);// 换点
-                else
-                    mImageViews[i]
-                            .setBackgroundResource(R.mipmap.banner_cicle_notchoose);
-            } else {
-                if (this.stype == 1)
-                    // mImageViews[i].setBackgroundResource(R.mipmap.banner_dian_blur);
-                    mImageViews[i]
-                            .setBackgroundResource(R.mipmap.banner_cicle_choosed);
-                else
-                    mImageViews[i]
-                            .setBackgroundResource(R.mipmap.banner_cicle_choosed);
+                mImageViews[i] = mImageView;
+                if (i == 0) {
+                    if (this.stype == 1)
+                        // mImageViews[i].setBackgroundResource(R.mipmap.banner_dian_focus);
+                        mImageViews[i]
+                                .setBackgroundResource(R.mipmap.banner_cicle_notchoose);// 换点
+                    else
+                        mImageViews[i]
+                                .setBackgroundResource(R.mipmap.banner_cicle_notchoose);
+                } else {
+                    if (this.stype == 1)
+                        // mImageViews[i].setBackgroundResource(R.mipmap.banner_dian_blur);
+                        mImageViews[i]
+                                .setBackgroundResource(R.mipmap.banner_cicle_choosed);
+                    else
+                        mImageViews[i]
+                                .setBackgroundResource(R.mipmap.banner_cicle_choosed);
+                }
+                mGroup.addView(mImageViews[i]);
             }
-            mGroup.addView(mImageViews[i]);
+            mAdvAdapter = new ImageCycleAdapter(mApplication, mContext, adStrList,
+                    imageCycleViewListener);
+            mAdvPager.setAdapter(mAdvAdapter);
+            mAdvPager.setCurrentItem(Integer.MAX_VALUE / 2);
+            if (imageCount > 1) {
+                startImageTimerTask();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        mAdvAdapter = new ImageCycleAdapter(mApplication,mContext, adStrList,
-                imageCycleViewListener);
-        mAdvPager.setAdapter(mAdvAdapter);
-        mAdvPager.setCurrentItem(Integer.MAX_VALUE / 2);
-        if (imageCount > 1) {
-            startImageTimerTask();
-        }
-
     }
 
 
-    public void refresh() {
-        mAdvAdapter.notifyDataSetChanged();
+    public void refresh(ArrayList<String> list) {
+        mAdvAdapter.setData(list);
+//        mAdvAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -275,7 +281,7 @@ public class ImageCycleView extends LinearLayout {
                 mAdvPager.setCurrentItem(mAdvPager.getCurrentItem() + 1);
                 if (!isStop) { // if isStop=true //当你退出后 要把这个给停下来 不然 这个一直存在
                     // 就一直在后台循环
-                    mHandler.postDelayed(mImageTimerTask, 5000);
+                    mHandler.postDelayed(mImageTimerTask, 3000);
                 }
 
             }
@@ -359,13 +365,21 @@ public class ImageCycleView extends LinearLayout {
         private Context mContext;
         private Application mApplication;
 
-        public ImageCycleAdapter(Application mApplication,Context context, ArrayList<String> adList,
+        public ImageCycleAdapter(Application mApplication, Context context, ArrayList<String> adList,
                                  ImageCycleViewListener imageCycleViewListener) {
-            this.mApplication=mApplication;
+            this.mApplication = mApplication;
             this.mContext = context;
             this.mAdList = adList;
             mImageCycleViewListener = imageCycleViewListener;
             mImageViewCacheList = new ArrayList<SmartImageView>();
+        }
+
+        public void setData(ArrayList<String> list){
+            if(list!=null){
+                mAdList.clear();
+                mAdList.addAll(list);
+                notifyDataSetChanged();
+            }
         }
 
 
@@ -381,20 +395,20 @@ public class ImageCycleView extends LinearLayout {
 
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
-            String imageUrl = mAdList.get(position % mAdList.size());
+//            String imageUrl = mAdList.get(position % mAdList.size());
             SmartImageView imageView = null;
             if (mImageViewCacheList.isEmpty()) {
                 imageView = new SmartImageView(mContext);
                 imageView.setLayoutParams(new LayoutParams(
                         LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
-                imageView.setScaleType(ScaleType.CENTER_CROP);
+//                imageView.setScaleType(ScaleType.CENTER_CROP);
 
             } else {
                 imageView = mImageViewCacheList.remove(0);
             }
 //            imageView.setTag(imageUrl);
-            imageView.setImageResource(R.mipmap.icon_nopic);
+            imageView.setImageResource(R.mipmap.logo);
             container.addView(imageView);
 
             if (bitmaps != null && bitmaps.size() > 0) {
@@ -406,8 +420,8 @@ public class ImageCycleView extends LinearLayout {
                 if (imagePath != null && !imagePath.contains("http")) {
                     imagePath = "file://" + imagePath;
                 }
-                if(Util.isOnMainThread()) {
-                    Glide.with(mApplication).load(imagePath).placeholder(R.mipmap.icon_nopic).into(imageView);
+                if (Util.isOnMainThread()) {
+                    Glide.with(mApplication).load(imagePath).placeholder(R.mipmap.logo).into(imageView);
                 }
             }
             // 设置图片点击监听

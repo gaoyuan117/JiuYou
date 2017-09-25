@@ -7,93 +7,124 @@ import android.content.Context;
 import java.util.Stack;
 
 public class AppManager {
-	private static Stack<Activity> mActivityStack;
-	private static AppManager mAppManager;
 
-	private AppManager() {
-	}
+    private static Stack<Activity> activityStack;
+    //private static AppManager instance = null; // 懒汉式 有缺陷
+    private static AppManager instance = new AppManager();// 饿汉式 安全 简单
 
-	/**
-	 * 单一实例
-	 */
-	public static AppManager getInstance() {
-		if (mAppManager == null) {
-			mAppManager = new AppManager();
-		}
-		return mAppManager;
-	}
+    private static Stack<Activity> activityList;
 
-	/**
-	 * 添加Activity到堆栈
-	 */
-	public void addActivity(Activity activity) {
-		if (mActivityStack == null) {
-			mActivityStack = new Stack<Activity>();
-		}
-		mActivityStack.add(activity);
-	}
+    private AppManager() {
+    }
 
-	/**
-	 * 获取栈顶Activity（堆栈中最后一个压入的）
-	 */
-	public Activity getTopActivity() {
-		Activity activity = mActivityStack.lastElement();
-		return activity;
-	}
+    /**
+     * 单一实例
+     */
+    public static AppManager getAppManager() {
+        // (懒汉式)
+        //if (instance == null) {
+        //    instance = new AppManager();
+        //}
 
-	/**
-	 * 结束栈顶Activity（堆栈中最后一个压入的）
-	 */
-	public void killTopActivity() {
-		Activity activity = mActivityStack.lastElement();
-		killActivity(activity);
-	}
+        // 锁 多线程 (面试 考 懒汉式)
+        //if (instance == null) {
+        //    synchronized(AppManager.class){
+        //		if(instance == null){
+        //			instance = new AppManager();
+        //		}
+        //	}
+        //}
+        return instance;
+    }
 
-	/**
-	 * 结束指定的Activity
-	 */
-	public void killActivity(Activity activity) {
-		if (activity != null) {
-			mActivityStack.remove(activity);
-			activity.finish();
-			activity = null;
-		}
-	}
+    /**
+     * 添加Activity到堆栈
+     */
+    public void addActivity(Activity activity) {
+        if (activityStack == null) {
+            activityStack = new Stack<>();
+        }
+        activityStack.add(activity);
+    }
 
-	/**
-	 * 结束指定类名的Activity
-	 */
-	public void killActivity(Class<?> cls) {
-		for (Activity activity : mActivityStack) {
-			if (activity.getClass().equals(cls)) {
-				killActivity(activity);
-			}
-		}
-	}
+    /**
+     * 添加Activity到堆栈
+     */
+    public void AaddActivityList(Activity activity) {
+        if (activityList == null) {
+            activityList = new Stack<>();
+        }
+        activityList.add(activity);
+    }
 
-	/**
-	 * 结束所有Activity
-	 */
-	public void killAllActivity() {
-		for (int i = 0, size = mActivityStack.size(); i < size; i++) {
-			if (null != mActivityStack.get(i)) {
-				mActivityStack.get(i).finish();
-			}
-		}
-		mActivityStack.clear();
-	}
 
-	/**
-	 * 退出应用程序
-	 */
-	public void AppExit(Context context) {
-		try {
-			killAllActivity();
-			ActivityManager activityMgr = (ActivityManager) context
-					.getSystemService(Context.ACTIVITY_SERVICE);
-			activityMgr.restartPackage(context.getPackageName());
-			System.exit(0);
-		} catch (Exception e) {
-		}
-	}
+    /**
+     * 获取当前Activity（堆栈中最后一个压入的）
+     */
+    public Activity currentActivity() {
+        Activity activity = activityStack.lastElement();
+        return activity;
+    }
+
+    /**
+     * 结束当前Activity（堆栈中最后一个压入的）
+     */
+    public void finishActivity() {
+        if (activityStack != null && activityStack.size() > 0) {
+            Activity activity = activityStack.lastElement();
+            finishActivity(activity);
+        }
+    }
+
+    /**
+     * 结束指定的Activity
+     */
+    public void finishActivity(Activity activity) {
+        if (activity != null) {
+            activityStack.remove(activity);
+            activity.finish();
+            activity = null;
+        }
+    }
+
+    /**
+     * 结束指定类名的Activity
+     */
+    public void finishActivity(Class<?> cls) {
+        if (activityStack != null && activityStack.size() > 0) {
+            for (Activity activity : activityStack) {
+                if (activity.getClass().equals(cls)) {
+                    finishActivity(activity);
+                }
+            }
+        }
+    }
+
+    /**
+     * 结束所有Activity
+     */
+    public void finishAllActivity() {
+        if (activityStack != null && activityStack.size() > 0) {
+            for (int i = 0, size = activityStack.size(); i < size; i++) {
+                if (null != activityStack.get(i)) {
+                    activityStack.get(i).finish();
+                }
+            }
+            activityStack.clear();
+        }
+    }
+
+    /**
+     * 结束所有Activity
+     */
+    public void AfinishListActivity() {
+        if (activityList != null && activityList.size() > 0) {
+            for (int i = 0, size = activityList.size(); i < size; i++) {
+                if (null != activityList.get(i)) {
+                    activityList.get(i).finish();
+                }
+            }
+            activityList.clear();
+        }
+    }
 }
